@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../lib/libvtkm_filter_extra-1.5.a  CMakeFiles/vtkm_filter_extra.dir/ClipWithField.cxx.o CMakeFiles/vtkm_filter_extra.dir/ClipWithImplicitFunction.cxx.o CMakeFiles/vtkm_filter_extra.dir/PointAverage.cxx.o CMakeFiles/vtkm_filter_extra.dir/VectorMagnitude.cxx.o CMakeFiles/vtkm_filter_extra.dir/ExternalFaces.cxx.o CMakeFiles/vtkm_filter_extra.dir/particleadvection/Messenger.cxx.o CMakeFiles/vtkm_filter_extra.dir/particleadvection/ParticleMessenger.cxx.o
+/usr/bin/ranlib ../../lib/libvtkm_filter_extra-1.5.a

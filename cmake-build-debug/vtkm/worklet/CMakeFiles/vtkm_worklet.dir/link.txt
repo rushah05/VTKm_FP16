@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../lib/libvtkm_worklet-1.5.a  CMakeFiles/vtkm_worklet.dir/KeysUnsignedTypes.cxx.o CMakeFiles/vtkm_worklet.dir/KeysSignedTypes.cxx.o CMakeFiles/vtkm_worklet.dir/MaskSelect.cxx.o CMakeFiles/vtkm_worklet.dir/ScatterCounting.cxx.o
+/usr/bin/ranlib ../../lib/libvtkm_worklet-1.5.a

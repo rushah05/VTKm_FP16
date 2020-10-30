@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../lib/libvtkm_source-1.5.a  CMakeFiles/vtkm_source.dir/Oscillator.cxx.o CMakeFiles/vtkm_source.dir/Source.cxx.o CMakeFiles/vtkm_source.dir/Tangle.cxx.o CMakeFiles/vtkm_source.dir/Wavelet.cxx.o
+/usr/bin/ranlib ../../lib/libvtkm_source-1.5.a

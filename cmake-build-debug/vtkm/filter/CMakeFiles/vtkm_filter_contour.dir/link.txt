@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../lib/libvtkm_filter_contour-1.5.a  CMakeFiles/vtkm_filter_contour.dir/Contour.cxx.o CMakeFiles/vtkm_filter_contour.dir/ContourInteger.cxx.o CMakeFiles/vtkm_filter_contour.dir/ContourScalar.cxx.o
+/usr/bin/ranlib ../../lib/libvtkm_filter_contour-1.5.a

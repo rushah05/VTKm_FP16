@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../lib/libvtkm_filter_gradient-1.5.a  CMakeFiles/vtkm_filter_gradient.dir/GradientScalar.cxx.o CMakeFiles/vtkm_filter_gradient.dir/GradientUniformPoints.cxx.o CMakeFiles/vtkm_filter_gradient.dir/GradientVector.cxx.o
+/usr/bin/ranlib ../../lib/libvtkm_filter_gradient-1.5.a

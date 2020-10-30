@@ -1,0 +1,12 @@
+# CMake generated Testfile for 
+# Source directory: /home/ruchi/fp16_vtkm_new/vtk-m/vtkm/exec/internal/testing
+# Build directory: /home/ruchi/fp16_vtkm_new/vtk-m/cmake-build-debug/vtkm/exec/internal/testing
+# 
+# This file includes the relevant testing commands required for 
+# testing this directory and lists subdirectories to be tested as well.
+add_test(UnitTestErrorMessageBuffer "/home/ruchi/fp16_vtkm_new/vtk-m/cmake-build-debug/bin/UnitTests_vtkm_exec_internal_testing" "UnitTestErrorMessageBuffer" "-v" "INFO" "--data-dir=/home/ruchi/fp16_vtkm_new/vtk-m/data/data" "--baseline-dir=/home/ruchi/fp16_vtkm_new/vtk-m/data/baseline")
+set_tests_properties(UnitTestErrorMessageBuffer PROPERTIES  FAIL_REGULAR_EXPRESSION "runtime error" LABELS ";" RUN_SERIAL "FALSE" TIMEOUT "180" _BACKTRACE_TRIPLES "/home/ruchi/fp16_vtkm_new/vtk-m/CMake/testing/VTKmTestWrappers.cmake;263;add_test;/home/ruchi/fp16_vtkm_new/vtk-m/vtkm/exec/internal/testing/CMakeLists.txt;22;vtkm_unit_tests;/home/ruchi/fp16_vtkm_new/vtk-m/vtkm/exec/internal/testing/CMakeLists.txt;0;")
+add_test(UnitTestTaskSingular "/home/ruchi/fp16_vtkm_new/vtk-m/cmake-build-debug/bin/UnitTests_vtkm_exec_internal_testing" "UnitTestTaskSingular" "-v" "INFO" "--data-dir=/home/ruchi/fp16_vtkm_new/vtk-m/data/data" "--baseline-dir=/home/ruchi/fp16_vtkm_new/vtk-m/data/baseline")
+set_tests_properties(UnitTestTaskSingular PROPERTIES  FAIL_REGULAR_EXPRESSION "runtime error" LABELS ";" RUN_SERIAL "FALSE" TIMEOUT "180" _BACKTRACE_TRIPLES "/home/ruchi/fp16_vtkm_new/vtk-m/CMake/testing/VTKmTestWrappers.cmake;263;add_test;/home/ruchi/fp16_vtkm_new/vtk-m/vtkm/exec/internal/testing/CMakeLists.txt;22;vtkm_unit_tests;/home/ruchi/fp16_vtkm_new/vtk-m/vtkm/exec/internal/testing/CMakeLists.txt;0;")
+add_test(UnitTestWorkletInvokeFunctor "/home/ruchi/fp16_vtkm_new/vtk-m/cmake-build-debug/bin/UnitTests_vtkm_exec_internal_testing" "UnitTestWorkletInvokeFunctor" "-v" "INFO" "--data-dir=/home/ruchi/fp16_vtkm_new/vtk-m/data/data" "--baseline-dir=/home/ruchi/fp16_vtkm_new/vtk-m/data/baseline")
+set_tests_properties(UnitTestWorkletInvokeFunctor PROPERTIES  FAIL_REGULAR_EXPRESSION "runtime error" LABELS ";" RUN_SERIAL "FALSE" TIMEOUT "180" _BACKTRACE_TRIPLES "/home/ruchi/fp16_vtkm_new/vtk-m/CMake/testing/VTKmTestWrappers.cmake;263;add_test;/home/ruchi/fp16_vtkm_new/vtk-m/vtkm/exec/internal/testing/CMakeLists.txt;22;vtkm_unit_tests;/home/ruchi/fp16_vtkm_new/vtk-m/vtkm/exec/internal/testing/CMakeLists.txt;0;")

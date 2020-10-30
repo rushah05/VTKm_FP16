@@ -1,0 +1,10 @@
+# CMake generated Testfile for 
+# Source directory: /home/ruchi/fp16_vtkm_new/vtk-m/examples
+# Build directory: /home/ruchi/fp16_vtkm_new/vtk-m/cmake-build-debug/examples
+# 
+# This file includes the relevant testing commands required for 
+# testing this directory and lists subdirectories to be tested as well.
+add_test(demo_built_against_test_install "/snap/clion/129/bin/cmake/linux/bin/ctest" "-C" "Debug" "--build-and-test" "/home/ruchi/fp16_vtkm_new/vtk-m/examples/demo/" "/home/ruchi/fp16_vtkm_new/vtk-m/cmake-build-debug/CMakeFiles/_tmp_build/test_demo/" "--build-generator" "Unix Makefiles" "--build-makeprogram" "/usr/bin/make" "--build-options" "-C" "/home/ruchi/fp16_vtkm_new/vtk-m/cmake-build-debug/CMakeFiles/_tmp_build/test_demo/build_options.cmake" "--no-warn-unused-cli")
+set_tests_properties(demo_built_against_test_install PROPERTIES  FIXTURES_REQUIRED "vtkm_installed" LABELS "TEST_INSTALL" TIMEOUT "600" _BACKTRACE_TRIPLES "/home/ruchi/fp16_vtkm_new/vtk-m/CMake/testing/VTKmTestInstall.cmake;124;add_test;/home/ruchi/fp16_vtkm_new/vtk-m/examples/CMakeLists.txt;41;vtkm_test_against_install;/home/ruchi/fp16_vtkm_new/vtk-m/examples/CMakeLists.txt;0;")
+add_test(histogram_built_against_test_install "/snap/clion/129/bin/cmake/linux/bin/ctest" "-C" "Debug" "--build-and-test" "/home/ruchi/fp16_vtkm_new/vtk-m/examples/histogram/" "/home/ruchi/fp16_vtkm_new/vtk-m/cmake-build-debug/CMakeFiles/_tmp_build/test_histogram/" "--build-generator" "Unix Makefiles" "--build-makeprogram" "/usr/bin/make" "--build-options" "-C" "/home/ruchi/fp16_vtkm_new/vtk-m/cmake-build-debug/CMakeFiles/_tmp_build/test_histogram/build_options.cmake" "--no-warn-unused-cli")
+set_tests_properties(histogram_built_against_test_install PROPERTIES  FIXTURES_REQUIRED "vtkm_installed" LABELS "TEST_INSTALL" TIMEOUT "600" _BACKTRACE_TRIPLES "/home/ruchi/fp16_vtkm_new/vtk-m/CMake/testing/VTKmTestInstall.cmake;124;add_test;/home/ruchi/fp16_vtkm_new/vtk-m/examples/CMakeLists.txt;42;vtkm_test_against_install;/home/ruchi/fp16_vtkm_new/vtk-m/examples/CMakeLists.txt;0;")

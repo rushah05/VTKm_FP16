@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../../lib/libvtkm_lodepng-1.5.a  CMakeFiles/vtkm_lodepng.dir/vtkmlodepng/lodepng.cpp.o
+/usr/bin/ranlib ../../../lib/libvtkm_lodepng-1.5.a
