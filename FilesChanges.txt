@@ -1,0 +1,6 @@
+Added new files
+vtk-m/vtkm/TypesHalf.h (performs FP16 GPU operations and conversions from float<->FP16)
+vtk-m/vtkm/Half.h (performs FP16 CPU operations)
+
+
+Replicated files to support FP16 only
