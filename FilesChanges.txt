@@ -1,6 +1,22 @@
-Added new files
-vtk-m/vtkm/TypesHalf.h (performs FP16 GPU operations and conversions from float<->FP16)
-vtk-m/vtkm/Half.h (performs FP16 CPU operations)
+Added new files\\
+  vtk-m/vtkm/TypesHalf.h (performs FP16 GPU operations and conversions from float<->FP16)\\
+  vtk-m/vtkm/Half.h (performs FP16 CPU operations)\\
 
+Replicated files from existing files to support FP16 only\\
+  vtk-m/vtkm/internal/ArrayPortalUniformPointCoordinatesFP16.h\\
+  vtk-m/vtkm/cont/ArrayHandleUniformPointCoordinatesFP16.h\\
+  vtk-m/vtkm/cont/ArrayHandleVirtualCoordinatesFP16.h\\
+  vtk-m/vtkm/cont/CoordinateSystemFP16.cxx\\
+  vtk-m/vtkm/cont/CoordinateSystemFP16.h\\
+  vtk-m/vtkm/worklet/contour/FlyingEdgesFP16.h\\
 
-Replicated files to support FP16 only
+Changes existing files to support FP16 changes\\
+  vtk-m/vtkm/cont/ArrayRangeCompute.h\\
+  vtk-m/vtkm/cont/Field.h\\
+  vtk-m/vtkm/cont/DataSet.h\\
+  vtk-m/vtkm/cont/DataSet.cxx\\
+  vtk-m/vtkm/cont/ArrayHandleVirtual.h\\
+  vtk-m/vtkm/filter/FilterDataSetWithField.hxx\\
+  vtk-m/vtkm/filter/FilterDataSetWithField.h\\
+  
+  
