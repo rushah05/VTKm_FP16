@@ -11,6 +11,7 @@ Replicated files from existing files to support FP16 only
   vtk-m/vtkm/worklet/contour/FlyingEdgesFP16.h
 
 Changes existing files to support FP16 changes
+  vtk-m/vtkm/cont/ArrayHandleVirtual.h
   vtk-m/vtkm/cont/ArrayRangeCompute.h
   vtk-m/vtkm/cont/Field.h
   vtk-m/vtkm/cont/DataSet.h
