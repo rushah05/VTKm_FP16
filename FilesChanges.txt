@@ -1,6 +1,8 @@
+[Hint :: Search for FP16/16 in the below files]
+
 Added new files
-  vtk-m/vtkm/TypesHalf.h (performs FP16 GPU operations and conversions from float<->FP16)
-  vtk-m/vtkm/Half.h (performs FP16 CPU operations)
+  vtk-m/vtkm/TypesHalf.h (performs Float16 GPU arithmetic operations and conversions from float<->Float16)
+  vtk-m/vtkm/Half.h (performs Float16 CPU arithmetic operations)
 
 Replicated files from existing files to support FP16 only
   vtk-m/vtkm/internal/ArrayPortalUniformPointCoordinatesFP16.h
@@ -19,5 +21,7 @@ Changes existing files to support FP16 changes
   vtk-m/vtkm/cont/ArrayHandleVirtual.h
   vtk-m/vtkm/filter/FilterDataSetWithField.hxx
   vtk-m/vtkm/filter/FilterDataSetWithField.h
-  
+  vtk-m/vtkm/Types.h (Included TypesHalf.h file and added new datatypes like Vec2f_16, Vec3f_16, Vec4f_16. Added arithmetic operations for the Vector datatype)
+  vtk-m/vtkm/TypeList.h(Added datatype Float16 in the default list)
+  vtk-m/vtkm/VectorTraits.h(Added support for Float16)
   
