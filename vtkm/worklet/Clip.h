@@ -112,6 +112,7 @@ VTKM_EXEC_CONT T Scale(const T& val, vtkm::Float64 scale)
         return static_cast<T>(scale * static_cast<T>(val));
 }
 
+inline
 VTKM_EXEC_CONT vtkm::Float16 Scale(const vtkm::Float16& val, vtkm::Float64 scale)
 {
 	vtkm::Float32 result32 = static_cast<vtkm::Float32>(static_cast<vtkm::Float32>(scale));
