@@ -95,7 +95,7 @@ template <class ArrayPortalType>
 struct VTKM_ALWAYS_EXPORT
   Storage<typename ArrayPortalType::ValueType, StorageTagImplicit<ArrayPortalType>>
 {
-  //VTKM_IS_TRIVIALLY_COPYABLE(ArrayPortalType);
+ // VTKM_IS_TRIVIALLY_COPYABLE(ArrayPortalType);
 
   VTKM_STORAGE_NO_RESIZE;
   VTKM_STORAGE_NO_WRITE_PORTAL;

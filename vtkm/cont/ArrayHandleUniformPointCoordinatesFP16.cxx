@@ -65,7 +65,7 @@ ArrayExtractComponentImpl<vtkm::cont::StorageTagUniformPointsFP16>::operator()(
   vtkm::cont::ArrayHandleBasic<vtkm::Float16> componentArray;
   componentArray.Allocate(dims[componentIndex]);
   auto portal = componentArray.WritePortal();
-/*  for (vtkm::Id i = 0; i < dims[componentIndex]; ++i)
+ /* for (vtkm::Id i = 0; i < dims[componentIndex]; ++i)
   {
     portal.Set(i, origin[componentIndex] + (i * spacing[componentIndex]));
   }

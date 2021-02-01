@@ -99,7 +99,7 @@ namespace cont
 template <>
 struct SerializableTypeString<vtkm::cont::ArrayHandleUniformPointCoordinatesFP16>
 {
-  static VTKM_CONT const std::string Get() { return "AH_UniformPointCoordinates"; }
+  static VTKM_CONT const std::string Get() { return "AH_UniformPointCoordinatesFP16"; }
 };
 
 template <>
@@ -124,23 +124,23 @@ private:
 public:
   static VTKM_CONT void save(BinaryBuffer& bb, const BaseType& obj)
   {
-   /* auto portal = obj.ReadPortal();
-    vtkmdiy::save(bb, portal.GetDimensions());
-    vtkmdiy::save(bb, portal.GetOrigin());
-    vtkmdiy::save(bb, portal.GetSpacing());
-  */
+   auto portal = obj.ReadPortal();
+   // vtkmdiy::save(bb, portal.GetDimensions());
+   // vtkmdiy::save(bb, portal.GetOrigin());
+   // vtkmdiy::save(bb, portal.GetSpacing());
+  
   }
 
   static VTKM_CONT void load(BinaryBuffer& bb, BaseType& obj)
   {
-/*    vtkm::Id3 dims;
+    vtkm::Id3 dims;
     typename BaseType::ValueType origin, spacing;
 
-    vtkmdiy::load(bb, dims);
-    vtkmdiy::load(bb, origin);
-    vtkmdiy::load(bb, spacing);/
+    //vtkmdiy::load(bb, dims);
+    //vtkmdiy::load(bb, origin);
+    //vtkmdiy::load(bb, spacing);
     obj = vtkm::cont::ArrayHandleUniformPointCoordinatesFP16(dims, origin, spacing);
-*/
+
   }
 };
 
@@ -153,4 +153,4 @@ struct Serialization<vtkm::cont::ArrayHandle<vtkm::Vec3f_16, vtkm::cont::Storage
 } // diy
 /// @endcond SERIALIZATION
 
-#endif //vtk_+m_cont_ArrayHandleUniformPointCoordinatesFP16_h
+#endif //vtk_m_cont_ArrayHandleUniformPointCoordinatesFP16_h

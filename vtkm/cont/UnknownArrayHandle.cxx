@@ -20,6 +20,7 @@
 #include <vtkm/cont/ArrayHandleReverse.h>
 #include <vtkm/cont/ArrayHandleSOA.h>
 #include <vtkm/cont/ArrayHandleUniformPointCoordinates.h>
+#include <vtkm/cont/ArrayHandleUniformPointCoordinatesFP16.h>
 #include <vtkm/cont/UncertainArrayHandle.h>
 
 namespace
@@ -56,7 +57,8 @@ using UnknownSerializationStorage =
                                                                 vtkm::cont::StorageTagBasic>,
                               vtkm::cont::StorageTagReverse<vtkm::cont::StorageTagBasic>,
                               vtkm::cont::StorageTagSOA,
-                              vtkm::cont::StorageTagUniformPoints>>;
+                              vtkm::cont::StorageTagUniformPoints,
+			      vtkm::cont::StorageTagUniformPointsFP16>>;
 
 } // anonymous namespace
 
