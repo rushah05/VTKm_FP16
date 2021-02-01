@@ -12,7 +12,6 @@
 #define vtk_m_filter_DataSetWithFieldFilter_h
 
 #include <vtkm/cont/CoordinateSystem.h>
-#include <vtkm/cont/CoordinateSystemFP16.h>
 #include <vtkm/cont/DataSet.h>
 #include <vtkm/cont/DynamicCellSet.h>
 #include <vtkm/cont/Field.h>
@@ -94,12 +93,6 @@ private:
   template <typename DerivedPolicy>
   VTKM_CONT vtkm::cont::DataSet PrepareForExecution(const vtkm::cont::DataSet& input,
                                                     const vtkm::cont::CoordinateSystem& field,
-                                                    vtkm::filter::PolicyBase<DerivedPolicy> policy);
-
-
-   template <typename DerivedPolicy>
-  VTKM_CONT vtkm::cont::DataSet PrepareForExecution(const vtkm::cont::DataSet& input,
-                                                    const vtkm::cont::CoordinateSystemFP16& field,
                                                     vtkm::filter::PolicyBase<DerivedPolicy> policy);
 
   std::string OutputFieldName;

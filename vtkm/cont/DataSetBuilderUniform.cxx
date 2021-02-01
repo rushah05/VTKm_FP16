@@ -42,8 +42,8 @@ vtkm::cont::DataSet DataSetBuilderUniform::Create(const vtkm::Id3& dimensions,
 
 VTKM_CONT
 vtkm::cont::DataSet DataSetBuilderUniform::CreateDataSet(const vtkm::Id3& dimensions,
-                                                         const vtkm::Vec3f& origin,
-                                                         const vtkm::Vec3f& spacing,
+                                                         const vtkm::Vec3f_16& origin,
+                                                         const vtkm::Vec3f_16& spacing,
                                                          const std::string& coordNm)
 {
   vtkm::Id dims[3] = { 1, 1, 1 };
@@ -52,7 +52,7 @@ vtkm::cont::DataSet DataSetBuilderUniform::CreateDataSet(const vtkm::Id3& dimens
   {
     if (dimensions[i] > 1)
     {
-      if (spacing[i] <= 0.0f)
+      if (spacing[i].to_float() <= 0.0f)
       {
         throw vtkm::cont::ErrorBadValue("spacing must be > 0.0");
       }
@@ -61,9 +61,9 @@ vtkm::cont::DataSet DataSetBuilderUniform::CreateDataSet(const vtkm::Id3& dimens
   }
 
   vtkm::cont::DataSet dataSet;
-  vtkm::cont::ArrayHandleUniformPointCoordinates coords(dimensions, origin, spacing);
-  vtkm::cont::CoordinateSystem cs(coordNm, coords);
-  dataSet.AddCoordinateSystem(cs);
+  vtkm::cont::ArrayHandleUniformPointCoordinatesFP16 coords(dimensions, origin, spacing);
+  vtkm::cont::CoordinateSystemFP16 cs(coordNm, coords);
+  dataSet.AddCoordinateSystemFP16(cs);
 
   if (ndims == 1)
   {

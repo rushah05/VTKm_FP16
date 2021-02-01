@@ -13,6 +13,7 @@
 
 #include <vtkm/cont/ArrayHandleTransform.h>
 #include <vtkm/cont/DataSet.h>
+#include <vtkm/worklet/ParticleAdvection.h>
 #include <vtkm/worklet/particleadvection/RK4Integrator.h>
 
 #include <memory>
@@ -35,12 +36,10 @@ class VTKM_ALWAYS_EXPORT DataSetIntegrator
 public:
   DataSetIntegrator(const vtkm::cont::DataSet& ds, vtkm::Id id, std::string fieldNm)
     : ActiveField(ds.GetField(fieldNm))
+    , CopySeedArray(false)
     , Eval(nullptr)
     , ID(id)
   {
-    const vtkm::cont::DynamicCellSet& cells = ds.GetCellSet();
-    const vtkm::cont::CoordinateSystem& coords = ds.GetCoordinateSystem();
-
     auto fieldData = this->ActiveField.GetData();
     FieldHandle fieldArray;
 
@@ -49,10 +48,11 @@ public:
     else
       vtkm::cont::ArrayCopy(fieldData.ResetTypes<vtkm::TypeListFieldVec3>(), fieldArray);
 
-    this->Eval = std::shared_ptr<GridEvalType>(new GridEvalType(coords, cells, fieldArray));
+    this->Eval = std::shared_ptr<GridEvalType>(new GridEvalType(ds, fieldArray));
   }
 
   vtkm::Id GetID() const { return this->ID; }
+  void SetCopySeedFlag(bool val) { this->CopySeedArray = val; }
 
   template <typename ResultType>
   void Advect(std::vector<vtkm::Particle>& v,
@@ -60,7 +60,8 @@ public:
               vtkm::Id maxSteps,
               ResultType& result) const
   {
-    auto seedArray = vtkm::cont::make_ArrayHandle(v, vtkm::CopyFlag::Off);
+    auto copyFlag = (this->CopySeedArray ? vtkm::CopyFlag::On : vtkm::CopyFlag::Off);
+    auto seedArray = vtkm::cont::make_ArrayHandle(v, copyFlag);
     RK4Type rk4(*this->Eval, stepSize);
     this->DoAdvect(seedArray, rk4, maxSteps, result);
   }
@@ -73,6 +74,7 @@ private:
                        ResultType& result) const;
 
   vtkm::cont::Field ActiveField;
+  bool CopySeedArray;
   std::shared_ptr<GridEvalType> Eval;
   vtkm::Id ID;
 };

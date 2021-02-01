@@ -65,8 +65,13 @@ public:
   }
 
   VTKM_EXEC_CONT
-  float to_float() const {
+  float to_float() const 
+  {
+#ifdef __CUDA_ARCH__
+    return __half2float(data);
+#else
     return cudaH2F(data);
+#endif
   }
 
 
@@ -165,6 +170,26 @@ VTKM_EXEC_CONT
    return TypesHalf(hostH2F(-hostF2H(cudaH2F(data))));
 #endif
  }
+
+
+VTKM_EXEC_CONT
+bool operator < (TypesHalf& h1){
+#ifdef  __CUDA_ARCH__
+   return cudaH2F(data) < h1.to_float();
+#else
+   return cudaH2F(data) < cudaH2F(h1.get());
+#endif
+ }
+
+VTKM_EXEC_CONT
+bool operator > (TypesHalf& h1){
+#ifdef  __CUDA_ARCH__
+   return cudaH2F(data) > h1.to_float();
+#else
+   return cudaH2F(data) > cudaH2F(h1.get());
+#endif
+ }
+
 
 VTKM_EXEC_CONT
  TypesHalf& operator=(float rhs) {

@@ -49,6 +49,13 @@ struct Range
   {
   }
 
+  inline
+  VTKM_EXEC_CONT Range(const vtkm::Float16& min, const vtkm::Float16& max)
+    : Min(static_cast<vtkm::Float64>(min.to_float()))
+    , Max(static_cast<vtkm::Float64>(max.to_float()))
+  {
+  }
+
   vtkm::Range& operator=(const vtkm::Range& src) = default;
   vtkm::Range& operator=(vtkm::Range&& src) = default;
 

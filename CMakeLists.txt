@@ -8,22 +8,18 @@
 ##  PURPOSE.  See the above copyright notice for more information.
 ##============================================================================
 
-# If you want CUDA support, you will need to have CMake 3.9 on Linux/OSX.
+# If you want CUDA support, you will need to have CMake 3.13 on Linux/OSX.
 # We require CMake 3.11 with the MSVC generator as the $<COMPILE_LANGUAGE:>
 # generator expression is not supported on older versions.
 cmake_minimum_required(VERSION 3.12...3.15 FATAL_ERROR)
 project (VTKm)
-
-
-if(${CMAKE_GENERATOR} MATCHES "Visual Studio")
-  cmake_minimum_required(VERSION 3.12...3.15 FATAL_ERROR)
-endif()
 
 # Update module path
 set(VTKm_CMAKE_MODULE_PATH ${VTKm_SOURCE_DIR}/CMake)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${VTKm_CMAKE_MODULE_PATH})
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I/usr/local/cuda-10.1/include")
 set(CMAKE_CUDA_FLAGS "-gencode arch=compute_70,code=sm_70")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -ftemplate-backtrace-limit=50")
 
 # Determine VTK-m version
 include(Utilities/Git/Git.cmake)
@@ -81,12 +77,12 @@ macro (vtkm_option variable)
 endmacro ()
 
 # Configurable Options
-vtkm_option(VTKm_ENABLE_CUDA "Enable Cuda support" ON)
-vtkm_option(VTKm_ENABLE_TBB "Enable TBB support" OFF)
+vtkm_option(VTKm_ENABLE_CUDA "Enable Cuda support" OFF)
+vtkm_option(VTKm_ENABLE_KOKKOS "Enable Kokkos support" OFF)
 vtkm_option(VTKm_ENABLE_OPENMP "Enable OpenMP support" OFF)
+vtkm_option(VTKm_ENABLE_TBB "Enable TBB support" OFF)
 vtkm_option(VTKm_ENABLE_RENDERING "Enable rendering library" ON)
 vtkm_option(VTKm_ENABLE_BENCHMARKS "Enable VTKm Benchmarking" OFF)
-vtkm_option(VTKm_ENABLE_LOGGING "Enable VTKm Logging" ON)
 vtkm_option(VTKm_ENABLE_MPI "Enable MPI support" OFF)
 vtkm_option(VTKm_ENABLE_DOCUMENTATION "Build Doxygen documentation" OFF)
 vtkm_option(VTKm_ENABLE_EXAMPLES "Build examples" OFF)
@@ -100,6 +96,11 @@ endif()
 
 vtkm_option(VTKm_USE_DOUBLE_PRECISION "Use double precision for floating point calculations" OFF)
 vtkm_option(VTKm_USE_64BIT_IDS "Use 64-bit indices." ON)
+
+vtkm_option(VTKm_ENABLE_HDF5_IO "Enable HDF5 support" OFF)
+if (VTKm_ENABLE_HDF5_IO)
+  find_package(HDF5 REQUIRED COMPONENTS HL)
+endif()
 
 # VTK-m will turn on logging by default, but will set the default
 # logging level to WARN.  This option should not be visible by default
@@ -116,6 +117,12 @@ vtkm_option(VTKm_NO_ASSERT "Disable assertions in debugging builds." OFF)
 # kernels with assert in them. By default we turn off asserts when compiling
 # for CUDA devices.
 vtkm_option(VTKm_NO_ASSERT_CUDA "Disable assertions for CUDA devices." ON)
+
+# The HIP compiler (as of ROCm 3.7) takes a surprising long time to compile
+# kernels with assert in them they generate `printf` calls which are very
+# slow ( cause massive register spillage). By default we turn off asserts when
+# compiling for HIP devices.
+vtkm_option(VTKm_NO_ASSERT_HIP "Disable assertions for HIP devices." ON)
 
 # When VTK-m is embedded into larger projects that wish to make end user
 # applications they want to only install libraries and don't want CMake/headers
@@ -141,14 +148,23 @@ vtkm_option(VTKm_ENABLE_DEVELOPER_FLAGS "Enable compiler flags that are useful w
 # Some application might need not to install those, hence this option.
 vtkm_option(VTKm_NO_INSTALL_README_LICENSE "disable the installation of README and LICENSE files" OFF)
 
+# We are in the process of deprecating the use of virtual methods because they
+# are not well supported on many accelerators. Turn this option on to remove
+# the code entirely. Note that the deprecation of virtual methods is work in
+# progress, so not all use of virtual methods may be done. In VTK-m 2.0
+# virtual methods should be removed entirely and this option will be removed.
+vtkm_option(VTKm_NO_DEPRECATED_VIRTUAL "Do not compile support of deprecated virtual methods" OFF)
+
 mark_as_advanced(
   VTKm_ENABLE_LOGGING
   VTKm_NO_ASSERT
   VTKm_NO_ASSERT_CUDA
+  VTKm_NO_ASSERT_HIP
   VTKm_INSTALL_ONLY_LIBRARIES
   VTKm_HIDE_PRIVATE_SYMBOLS
   VTKm_ENABLE_DEVELOPER_FLAGS
   VTKm_NO_INSTALL_README_LICENSE
+  VTKm_NO_DEPRECATED_VIRTUAL
   )
 
 #-----------------------------------------------------------------------------
@@ -212,7 +228,7 @@ if (VTKm_ENABLE_TESTING)
   # Setup compiler flags for dynamic analysis if needed
   include(testing/VTKmCompilerDynamicAnalysisFlags)
 
-endif (VTKm_ENABLE_TESTING)
+endif()
 
 #-----------------------------------------------------------------------------
 # Check basic type sizes.

@@ -23,7 +23,7 @@
 #include <type_traits>
 
 #ifdef VTKM_NO_DEPRECATED_VIRTUAL
-#error "ArrayHandleVirtualCoordiantes is removed. Do not include ArrayHandleVirtualCoordinatesFP16.h"
+#error "ArrayHandleVirtualCoordiantesFP16 is removed. Do not include ArrayHandleVirtualCoordinatesFP16.h"
 #endif
 
 namespace vtkm
@@ -69,7 +69,7 @@ void CastAndCall(const vtkm::cont::ArrayHandleVirtualCoordinatesFP16& coords,
 template <>
 struct SerializableTypeString<vtkm::cont::ArrayHandleVirtualCoordinatesFP16>
 {
-  static VTKM_CONT const std::string Get() { return "AH_VirtualCoordinates"; }
+  static VTKM_CONT const std::string Get() { return "AH_VirtualCoordinatesFP16"; }
 };
 
 VTKM_DEPRECATED_SUPPRESS_END

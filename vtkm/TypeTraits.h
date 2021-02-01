@@ -109,7 +109,7 @@ struct TypeTraits<const T> : TypeTraits<T>
 
 VTKM_BASIC_REAL_TYPE(float)
 VTKM_BASIC_REAL_TYPE(double)
-
+VTKM_BASIC_REAL_TYPE(vtkm::Float16)
 VTKM_BASIC_INTEGER_TYPE(char)
 VTKM_BASIC_INTEGER_TYPE(signed char)
 VTKM_BASIC_INTEGER_TYPE(unsigned char)

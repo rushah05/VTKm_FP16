@@ -12,6 +12,7 @@
 
 #include <vtkm/Algorithms.h>
 #include <vtkm/BinaryOperators.h>
+#include <vtkm/BinaryPredicates.h>
 #include <vtkm/TypeTraits.h>
 #include <vtkm/UnaryPredicates.h>
 #include <vtkm/cont/ArrayPortalToIterators.h>
@@ -83,15 +84,7 @@ struct WrappedBinaryOperator
   }
 };
 
-//needs to be in a location that TBB DeviceAdapterAlgorithm can reach
-struct DefaultCompareFunctor
-{
-  template <typename T>
-  VTKM_EXEC bool operator()(const T& first, const T& second) const
-  {
-    return first < second;
-  }
-};
+using DefaultCompareFunctor = vtkm::SortLess;
 
 //needs to be in a location that TBB DeviceAdapterAlgorithm can reach
 template <typename T, typename U, class BinaryCompare = DefaultCompareFunctor>
@@ -664,6 +657,23 @@ VTKM_EXEC static inline vtkm::Id IteratorDistanceImpl(const Iterator& from,
   return static_cast<vtkm::Id>(to - from);
 }
 
+#if defined(VTKM_HIP)
+
+template <typename Iterator>
+__host__ static inline vtkm::Id IteratorDistance(const Iterator& from, const Iterator& to)
+{
+  return static_cast<vtkm::Id>(std::distance(from, to));
+}
+
+template <typename Iterator>
+__device__ static inline vtkm::Id IteratorDistance(const Iterator& from, const Iterator& to)
+{
+  return IteratorDistanceImpl(
+    from, to, typename std::iterator_traits<Iterator>::iterator_category{});
+}
+
+#else
+
 template <typename Iterator>
 VTKM_EXEC static inline vtkm::Id IteratorDistance(const Iterator& from, const Iterator& to)
 {
@@ -674,6 +684,8 @@ VTKM_EXEC static inline vtkm::Id IteratorDistance(const Iterator& from, const It
     from, to, typename std::iterator_traits<Iterator>::iterator_category{});
 #endif
 }
+
+#endif
 
 template <class InputPortalType, class ValuesPortalType, class OutputPortalType>
 struct LowerBoundsKernel

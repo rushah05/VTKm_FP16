@@ -11,6 +11,7 @@
 set(headers
   Algorithm.h
   ArrayCopy.h
+  ArrayExtractComponent.h
   ArrayGetValues.h
   ArrayHandle.h
   ArrayHandleBasic.h
@@ -32,11 +33,13 @@ set(headers
   ArrayHandleIndex.h
   ArrayHandleMultiplexer.h
   ArrayHandlePermutation.h
+  ArrayHandleRecombineVec.h
   ArrayHandleReverse.h
   ArrayHandleRandomStandardNormal.h
   ArrayHandleRandomUniformBits.h
   ArrayHandleRandomUniformReal.h
   ArrayHandleSOA.h
+  ArrayHandleStride.h
   ArrayHandleSwizzle.h
   ArrayHandleTransform.h
   ArrayHandleUniformPointCoordinates.h
@@ -46,6 +49,7 @@ set(headers
   ArrayPortal.h
   ArrayPortalToIterators.h
   ArrayRangeCompute.h
+  ArrayRangeComputeTemplate.h
   AssignerPartitionedDataSet.h
   AtomicArray.h
   BitField.h
@@ -56,6 +60,7 @@ set(headers
   CellLocatorBoundingIntervalHierarchy.h
   CellLocatorGeneral.h
   CellLocatorRectilinearGrid.h
+  CellLocatorTwoLevel.h
   CellLocatorUniformBins.h
   CellLocatorUniformGrid.h
   CellSet.h
@@ -104,12 +109,13 @@ set(headers
   PartitionedDataSet.h
   PointLocator.h
   PointLocatorUniformGrid.h
+  PointLocatorSparseGrid.h
   RuntimeDeviceInformation.h
   RuntimeDeviceTracker.h
   Serialization.h
   Storage.h
   StorageExtrude.h
-  StorageImplicit.h
+  StorageImplicit.h # Deprecated, rolled into ArrayHandleImplicit.h
   StorageList.h
   StorageListTag.h
   Timer.h
@@ -123,13 +129,10 @@ set(headers
   )
 
 set(template_sources
-  ArrayHandle.hxx
-  ArrayRangeCompute.hxx
+  ArrayRangeCompute.hxx # Deprecated, replaced with ArrayRangeComputeTemplate.h
   CellSetExplicit.hxx
   CellSetExtrude.hxx
   CellSetStructured.hxx
-  FieldRangeCompute.hxx
-  FieldRangeGlobalCompute.hxx
   ParticleArrayCopy.hxx
   VirtualObjectHandle.hxx
   )
@@ -138,6 +141,9 @@ set(sources
   ArrayHandle.cxx
   ArrayHandleBasic.cxx
   ArrayHandleSOA.cxx
+  ArrayHandleStride.cxx
+  ArrayHandleUniformPointCoordinates.cxx
+  ArrayHandleUniformPointCoordinatesFP16.cxx
   BitField.cxx
   ColorTablePresets.cxx
   DeviceAdapterTag.cxx
@@ -152,6 +158,7 @@ set(sources
   Initialize.cxx
   Logging.cxx
   RuntimeDeviceTracker.cxx
+  Storage.cxx
   Token.cxx
   TryExecute.cxx
   )
@@ -167,7 +174,7 @@ set(sources
   CellLocatorBoundingIntervalHierarchy.cxx
   CellLocatorGeneral.cxx
   CellLocatorRectilinearGrid.cxx
-  CellLocatorUniformBins.cxx
+  CellLocatorTwoLevel.cxx
   CellLocatorUniformGrid.cxx
   CellSet.cxx
   CellSetExplicit.cxx
@@ -185,7 +192,7 @@ set(sources
   FieldRangeGlobalCompute.cxx
   PartitionedDataSet.cxx
   PointLocator.cxx
-  PointLocatorUniformGrid.cxx
+  PointLocatorSparseGrid.cxx
   RuntimeDeviceInformation.cxx
   Timer.cxx
   UnknownArrayHandle.cxx
@@ -214,12 +221,36 @@ endif()
 vtkm_get_kit_name(kit_name kit_dir)
 
 # Some custom types included with VTK-m
-vtkm_option(VTKm_USE_DEFAULT_TYPES_FOR_VTK "Compile VTK-m algorithms for use with types from VTK." OFF)
+vtkm_option(VTKm_USE_DEFAULT_TYPES_FOR_VTK
+  "Compile VTK-m algorithms for use with types from VTK."
+  OFF
+  )
 if (VTKm_USE_DEFAULT_TYPES_FOR_VTK)
   set(VTKm_DEFAULT_TYPES_HEADER "internal/DefaultTypesVTK.h.in")
 endif()
 
-mark_as_advanced(VTKm_USE_DEFAULT_TYPES_FOR_VTK)
+vtkm_option(VTKm_USE_DEFAULT_TYPES_FOR_ASCENT
+  "Compile VTK-m algorithms for use with types from Ascent."
+  OFF
+  )
+if (VTKm_USE_DEFAULT_TYPES_FOR_ASCENT)
+  set(VTKm_DEFAULT_TYPES_HEADER "internal/DefaultTypesAscent.h.in")
+  if (VTKm_USE_64BIT_IDS)
+    message(SEND_ERROR
+      "When VTKm_USE_DEFAULT_TYPES_FOR_ASCENT is ON, VTKm_USE_64BIT_IDS must be set to OFF"
+      )
+  endif()
+  if (NOT VTKm_USE_DOUBLE_PRECISION)
+    message(SEND_ERROR
+      "When VTKm_USE_DEFAULT_TYPES_FOR_ASCENT is ON, VTKm_USE_DOUBLE_PRECISION must be set to ON"
+      )
+  endif()
+endif()
+
+mark_as_advanced(
+  VTKm_USE_DEFAULT_TYPES_FOR_VTK
+  VTKm_USE_DEFAULT_TYPES_FOR_ASCENT
+  )
 
 if (VTKm_DEFAULT_TYPES_HEADER)
   set(VTK_M_HAS_DEFAULT_TYPES_HEADER TRUE)
