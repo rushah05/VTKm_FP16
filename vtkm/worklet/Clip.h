@@ -29,7 +29,7 @@
 #include <vtkm/cont/ImplicitFunctionHandle.h>
 #include <vtkm/cont/Timer.h>
 #include <vtkm/cont/VariantArrayHandle.h>
-#include <vtkm/Types.h>
+
 #include <utility>
 #include <vtkm/exec/FunctorBase.h>
 
@@ -109,7 +109,7 @@ namespace internal
 template <typename T>
 VTKM_EXEC_CONT T Scale(const T& val, vtkm::Float64 scale)
 {
-        return static_cast<T>(scale * static_cast<T>(val));
+  return static_cast<T>(scale * static_cast<vtkm::Float64>(val));
 }
 
 inline

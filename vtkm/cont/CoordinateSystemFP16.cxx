@@ -23,7 +23,7 @@ namespace detail
 VTKM_DEPRECATED_SUPPRESS_BEGIN
 vtkm::cont::ArrayHandleVirtualCoordinatesFP16 CoordDataDepWrapperFP16::ToArray() const
 {
-  return this->Cast<vtkm::cont::ArrayHandleVirtualCoordinatesFP16>();
+  return this->AsArrayHandle<vtkm::cont::ArrayHandleVirtualCoordinatesFP16>();
 }
 VTKM_DEPRECATED_SUPPRESS_END
 
@@ -36,8 +36,8 @@ VTKM_CONT CoordinateSystemFP16::CoordinateSystemFP16()
 }
 
 VTKM_CONT CoordinateSystemFP16::CoordinateSystemFP16(std::string name,
-                                             const vtkm::cont::VariantArrayHandleCommon& data)
-  : Superclass(name, Association::POINTS, vtkm::cont::VariantArrayHandle{ data })
+                                             const vtkm::cont::UnknownArrayHandle& data)
+  : Superclass(name, Association::POINTS, data)
 {
 }
 
@@ -60,19 +60,20 @@ VTKM_CONT vtkm::cont::detail::CoordDataDepWrapperFP16 CoordinateSystemFP16::GetD
   return vtkm::cont::detail::CoordDataDepWrapperFP16(this->Superclass::GetData());
 }
 #else  //!VTKM_NO_DEPRECATED_VIRTUAL
-VTKM_CONT vtkm::cont::VariantArrayHandleBase<vtkm::TypeListFieldVec3_FP16> CoordinateSystemFP16::GetData()
-  const
+VTKM_CONT vtkm::cont::UncertainArrayHandle<vtkm::TypeListFieldVec3_FP16, VTKM_DEFAULT_STORAGE_LIST>
+CoordinateSystemFP16::GetData() const
 {
-  return vtkm::cont::VariantArrayHandleBase<vtkm::TypeListFieldVec3_FP16>(this->Superclass::GetData());
+  return vtkm::cont::UncertainArrayHandle<vtkm::TypeListFieldVec3_FP16, VTKM_DEFAULT_STORAGE_LIST>(
+    this->Superclass::GetData());
 }
 #endif //!VTKM_NO_DEPRECATED_VIRTUAL
 
 
-/*VTKM_CONT vtkm::cont::CoordinateSystemFP16::MultiplexerArrayType
+VTKM_CONT vtkm::cont::CoordinateSystemFP16::MultiplexerArrayType
 CoordinateSystemFP16::GetDataAsMultiplexer() const
 {
   return this->GetData().AsMultiplexer<MultiplexerArrayType>();
-}*/
+}
 
 VTKM_CONT
 void CoordinateSystemFP16::PrintSummary(std::ostream& out) const
@@ -84,8 +85,9 @@ void CoordinateSystemFP16::PrintSummary(std::ostream& out) const
 template VTKM_CONT_EXPORT CoordinateSystemFP16::CoordinateSystemFP16(
   std::string name,
   const vtkm::cont::ArrayHandle<vtkm::Vec<vtkm::Float16, 3>>&);
-
-
+template VTKM_CONT_EXPORT CoordinateSystemFP16::CoordinateSystemFP16(
+  std::string name,
+  const vtkm::cont::ArrayHandle<vtkm::Vec<float, 3>>&);
 template VTKM_CONT_EXPORT CoordinateSystemFP16::CoordinateSystemFP16(
   std::string name,
   const vtkm::cont::ArrayHandle<

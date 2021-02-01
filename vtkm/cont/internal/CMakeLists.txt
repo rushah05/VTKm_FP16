@@ -9,10 +9,8 @@
 ##============================================================================
 
 set(headers
+  ArrayHandleDeprecated.h
   ArrayHandleExecutionManager.h
-  ArrayManagerExecution.h
-  ArrayManagerExecutionShareWithControl.h
-  ArrayPortalCheck.h
   ArrayPortalFromIterators.h
   ArrayTransfer.h
   AtomicInterfaceControl.h
@@ -31,8 +29,10 @@ set(headers
   ParallelRadixSort.h
   ParallelRadixSortInterface.h
   ReverseConnectivityBuilder.h
+  StorageDeprecated.h
   StorageError.h
   TransferInfo.h
+  Variant.h
   VirtualObjectTransfer.h
   VirtualObjectTransferInstantiate.h
   VirtualObjectTransferShareWithControl.h

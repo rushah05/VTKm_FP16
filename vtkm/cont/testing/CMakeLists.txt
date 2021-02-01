@@ -15,7 +15,7 @@ set(headers
   TestingArrayHandles.h
   TestingArrayHandleMultiplexer.h
   TestingCellLocatorRectilinearGrid.h
-  TestingCellLocatorUniformBins.h
+  TestingCellLocatorTwoLevel.h
   TestingCellLocatorUniformGrid.h
   TestingColorTable.h
   TestingComputeRange.h
@@ -24,19 +24,19 @@ set(headers
   TestingDataSetSingleType.h
   TestingFancyArrayHandles.h
   TestingImplicitFunction.h
-  TestingPointLocatorUniformGrid.h
+  TestingPointLocatorSparseGrid.h
   TestingSerialization.h
   TestingVirtualObjectHandle.h
   )
 
-vtkm_declare_headers(${headers})
-
 set(unit_tests
   UnitTestAlgorithm.cxx
   UnitTestArrayCopy.cxx
+  UnitTestArrayExtractComponent.cxx
   UnitTestArrayGetValues.cxx
   UnitTestArrayHandleCartesianProduct.cxx
   UnitTestArrayHandleCompositeVector.cxx
+  UnitTestArrayHandleConcatenate.cxx
   UnitTestArrayHandleCounting.cxx
   UnitTestArrayHandleDecorator.cxx
   UnitTestArrayHandleDiscard.cxx
@@ -53,7 +53,6 @@ set(unit_tests
   UnitTestArrayHandleThreadSafety.cxx
   UnitTestArrayHandleTransform.cxx
   UnitTestArrayHandleUniformPointCoordinates.cxx
-  UnitTestArrayHandleConcatenate.cxx
   UnitTestArrayHandleVirtual.cxx
   UnitTestArrayPortalToIterators.cxx
   UnitTestCellLocatorGeneral.cxx
@@ -81,7 +80,6 @@ set(unit_tests
   UnitTestRuntimeDeviceInformation.cxx
   UnitTestRuntimeDeviceNames.cxx
   UnitTestScopedRuntimeDeviceTracker.cxx
-  UnitTestStorageImplicit.cxx
   UnitTestStorageList.cxx
   UnitTestStorageListTag.cxx
   UnitTestTimer.cxx
@@ -90,6 +88,22 @@ set(unit_tests
   UnitTestUnknownArrayHandle.cxx
   UnitTestVariantArrayHandle.cxx
   )
+
+set(library_sources
+  TestEqualArrayHandles.cxx
+  )
+
+set(library_sources_device
+  TestEqualArrayHandles.cxx # Really doesn't need device, but currently includes device headers
+  )
+
+vtkm_library(
+  NAME vtkm_cont_testing
+  SOURCES ${library_sources}
+  DEVICE_SOURCES ${library_sources_device}
+  HEADERS ${headers}
+  )
+target_link_libraries(vtkm_cont_testing PUBLIC vtkm_cont)
 
 vtkm_unit_tests(SOURCES ${unit_tests} DEFINES VTKM_NO_ERROR_ON_MIXED_CUDA_CXX_TAG)
 

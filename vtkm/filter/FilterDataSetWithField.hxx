@@ -119,37 +119,6 @@ inline VTKM_CONT vtkm::cont::DataSet FilterDataSetWithField<Derived>::PrepareFor
 //-----------------------------------------------------------------------------
 template <typename Derived>
 template <typename DerivedPolicy>
-inline VTKM_CONT vtkm::cont::DataSet FilterDataSetWithField<Derived>::PrepareForExecution(
-  const vtkm::cont::DataSet& input,
-  const vtkm::cont::CoordinateSystemFP16& field,
-  vtkm::filter::PolicyBase<DerivedPolicy> policy)
-{
-  //We have a special signature just for CoordinateSystem, so that we can ask
-  //the policy for the storage types and value types just for coordinate systems
-  vtkm::filter::FieldMetadata metaData(field);
-  vtkm::cont::DataSet result;
-
-  //determine the field type first
-  using Traits = vtkm::filter::FilterTraits<Derived>;
-  constexpr bool supportsVec3 =
-    vtkm::ListHas<typename Traits::InputFieldTypeList, vtkm::Vec3f_16>::value;
-  using supportsCoordinateSystem = std::integral_constant<bool, supportsVec3>;
-  vtkm::cont::ConditionalCastAndCall(supportsCoordinateSystem(),
-                                     field,
-                                     internal::ResolveFieldTypeAndExecute(),
-                                     static_cast<Derived*>(this),
-                                     input,
-                                     metaData,
-                                     policy,
-                                     result);
-
-  return result;
-}
-
-
-//-----------------------------------------------------------------------------
-template <typename Derived>
-template <typename DerivedPolicy>
 inline VTKM_CONT bool FilterDataSetWithField<Derived>::MapFieldOntoOutput(
   vtkm::cont::DataSet& result,
   const vtkm::cont::Field& field,

@@ -10,7 +10,7 @@
 #ifndef vtk_m_cont_DataSetBuilderUniform_h
 #define vtk_m_cont_DataSetBuilderUniform_h
 
-#include <vtkm/cont/CoordinateSystem.h>
+#include <vtkm/cont/CoordinateSystemFP16.h>
 #include <vtkm/cont/DataSet.h>
 
 namespace vtkm
@@ -20,7 +20,7 @@ namespace cont
 
 class VTKM_CONT_EXPORT DataSetBuilderUniform
 {
-  using VecType = vtkm::Vec3f;
+  using VecType = vtkm::Vec3f_16;
 
 public:
   VTKM_CONT
@@ -35,8 +35,8 @@ public:
   {
     return DataSetBuilderUniform::CreateDataSet(
       vtkm::Id3(dimension, 1, 1),
-      VecType(static_cast<vtkm::FloatDefault>(origin), 0, 0),
-      VecType(static_cast<vtkm::FloatDefault>(spacing), 1, 1),
+      VecType(origin, 0, 0),
+      VecType(spacing, 1, 1),
       coordNm);
   }
 
@@ -52,11 +52,11 @@ public:
                                               const std::string& coordNm = "coords")
   {
     return DataSetBuilderUniform::CreateDataSet(vtkm::Id3(dimensions[0], dimensions[1], 1),
-                                                VecType(static_cast<vtkm::FloatDefault>(origin[0]),
-                                                        static_cast<vtkm::FloatDefault>(origin[1]),
+                                                VecType(origin[0],
+                                                        origin[1],
                                                         0),
-                                                VecType(static_cast<vtkm::FloatDefault>(spacing[0]),
-                                                        static_cast<vtkm::FloatDefault>(spacing[1]),
+                                                VecType(spacing[0],
+                                                        spacing[1],
                                                         1),
                                                 coordNm);
   }
@@ -74,12 +74,12 @@ public:
   {
     return DataSetBuilderUniform::CreateDataSet(
       vtkm::Id3(dimensions[0], dimensions[1], dimensions[2]),
-      VecType(static_cast<vtkm::FloatDefault>(origin[0]),
-              static_cast<vtkm::FloatDefault>(origin[1]),
-              static_cast<vtkm::FloatDefault>(origin[2])),
-      VecType(static_cast<vtkm::FloatDefault>(spacing[0]),
-              static_cast<vtkm::FloatDefault>(spacing[1]),
-              static_cast<vtkm::FloatDefault>(spacing[2])),
+      VecType(origin[0],
+      		origin[1],
+              	origin[2]),
+      VecType(spacing[0],
+              spacing[1],
+              spacing[2]),
       coordNm);
   }
 
@@ -90,8 +90,8 @@ public:
 private:
   VTKM_CONT
   static vtkm::cont::DataSet CreateDataSet(const vtkm::Id3& dimensions,
-                                           const vtkm::Vec3f& origin,
-                                           const vtkm::Vec3f& spacing,
+                                           const vtkm::Vec3f_16& origin,
+                                           const vtkm::Vec3f_16& spacing,
                                            const std::string& coordNm);
 };
 

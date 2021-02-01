@@ -40,7 +40,7 @@ set(headers
   Matrix.h
   NewtonsMethod.h
   Pair.h
-  TypesHalf.h
+  Particle.h
   Range.h
   RangeId.h
   RangeId2.h
@@ -60,6 +60,7 @@ set(headers
   VecFromPortalPermute.h
   VecFromVirtPortal.h
   VectorAnalysis.h
+  VecFlat.h
   VecTraits.h
   VecVariable.h
   VirtualObjectBase.h

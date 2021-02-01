@@ -151,6 +151,19 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, Size> operator+(
   return a;
 }
 
+// Vec_Scalar for ['vtkm::Float16', 'vtkm::Float16']
+template <IdComponent Size>
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, Size> operator+(
+    vtkm::Vec<vtkm::Float16, Size> a, vtkm::Float16 scalar
+)
+{
+  for (int i = 0; i < Size; ++i)
+  {
+    a[i] = a[i] + scalar;
+  }
+  return a;
+}
+
 // Scalar_Vec for ['T', 'T']
 template <typename T, IdComponent Size>
 inline VTKM_EXEC_CONT vtkm::Vec<T, Size> operator+(
@@ -181,6 +194,32 @@ inline VTKM_EXEC_CONT vtkm::Vec<T, Size> operator+(
 template <IdComponent Size>
 inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, Size> operator+(
     vtkm::Float64 scalar, vtkm::Vec<vtkm::Float64, Size> a
+)
+{
+  for (int i = 0; i < Size; ++i)
+  {
+    a[i] = scalar + a[i];
+  }
+  return a;
+}
+
+// Scalar_Vec for ['T', 'vtkm::Float16']
+template <typename T, IdComponent Size>
+inline VTKM_EXEC_CONT vtkm::Vec<T, Size> operator+(
+    vtkm::Float16 scalar, vtkm::Vec<T, Size> a
+)
+{
+  for (int i = 0; i < Size; ++i)
+  {
+    a[i] = scalar + a[i];
+  }
+  return a;
+}
+
+// Scalar_Vec for ['vtkm::Float16', 'vtkm::Float16']
+template <IdComponent Size>
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, Size> operator+(
+    vtkm::Float16 scalar, vtkm::Vec<vtkm::Float16, Size> a
 )
 {
   for (int i = 0; i < Size; ++i)
@@ -244,6 +283,34 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, Size> operator*(
   return a;
 }
 
+// Vec_Scalar for ['T', 'vtkm::Float16']
+template <typename T, IdComponent Size>
+inline VTKM_EXEC_CONT vtkm::Vec<T, Size> operator*(
+    vtkm::Vec<T, Size> a, vtkm::Float16 scalar
+)
+{
+  for (int i = 0; i < Size; ++i)
+  {
+    a[i] = a[i] * scalar;
+  }
+  return a;
+}
+
+
+// Vec_Scalar for ['vtkm::Float16', 'vtkm::Float16']
+template <IdComponent Size>
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, Size> operator*(
+    vtkm::Vec<vtkm::Float16, Size> a, vtkm::Float16 scalar
+)
+{
+  for (int i = 0; i < Size; ++i)
+  {
+    a[i] = a[i] * scalar;
+  }
+  return a;
+}
+
+
 // Scalar_Vec for ['T', 'T']
 template <typename T, IdComponent Size>
 inline VTKM_EXEC_CONT vtkm::Vec<T, Size> operator*(
@@ -274,6 +341,32 @@ inline VTKM_EXEC_CONT vtkm::Vec<T, Size> operator*(
 template <IdComponent Size>
 inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, Size> operator*(
     vtkm::Float64 scalar, vtkm::Vec<vtkm::Float64, Size> a
+)
+{
+  for (int i = 0; i < Size; ++i)
+  {
+    a[i] = scalar * a[i];
+  }
+  return a;
+}
+
+// Scalar_Vec for ['T', 'vtkm::Float16']
+template <typename T, IdComponent Size>
+inline VTKM_EXEC_CONT vtkm::Vec<T, Size> operator*(
+    vtkm::Float16 scalar, vtkm::Vec<T, Size> a
+)
+{
+  for (int i = 0; i < Size; ++i)
+  {
+    a[i] = scalar * a[i];
+  }
+  return a;
+}
+
+// Scalar_Vec for ['vtkm::Float16', 'vtkm::Float16']
+template <IdComponent Size>
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, Size> operator*(
+    vtkm::Float16 scalar, vtkm::Vec<vtkm::Float16, Size> a
 )
 {
   for (int i = 0; i < Size; ++i)
@@ -337,6 +430,32 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, Size> operator-(
   return a;
 }
 
+// Vec_Scalar for ['T', 'vtkm::Float16']
+template <typename T, IdComponent Size>
+inline VTKM_EXEC_CONT vtkm::Vec<T, Size> operator-(
+    vtkm::Vec<T, Size> a, vtkm::Float16 scalar
+)
+{
+  for (int i = 0; i < Size; ++i)
+  {
+    a[i] = a[i] - scalar;
+  }
+  return a;
+}
+
+// Vec_Scalar for ['vtkm::Float16', 'vtkm::Float16']
+template <IdComponent Size>
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, Size> operator-(
+    vtkm::Vec<vtkm::Float16, Size> a, vtkm::Float64 scalar
+)
+{
+  for (int i = 0; i < Size; ++i)
+  {
+    a[i] = a[i] - scalar;
+  }
+  return a;
+}
+
 // Scalar_Vec for ['T', 'T']
 template <typename T, IdComponent Size>
 inline VTKM_EXEC_CONT vtkm::Vec<T, Size> operator-(
@@ -367,6 +486,32 @@ inline VTKM_EXEC_CONT vtkm::Vec<T, Size> operator-(
 template <IdComponent Size>
 inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, Size> operator-(
     vtkm::Float64 scalar, vtkm::Vec<vtkm::Float64, Size> a
+)
+{
+  for (int i = 0; i < Size; ++i)
+  {
+    a[i] = scalar - a[i];
+  }
+  return a;
+}
+
+// Scalar_Vec for ['T', 'vtkm::Float16']
+template <typename T, IdComponent Size>
+inline VTKM_EXEC_CONT vtkm::Vec<T, Size> operator-(
+    vtkm::Float16 scalar, vtkm::Vec<T, Size> a
+)
+{
+  for (int i = 0; i < Size; ++i)
+  {
+    a[i] = scalar - a[i];
+  }
+  return a;
+}
+
+// Scalar_Vec for ['vtkm::Float16', 'vtkm::Float16']
+template <IdComponent Size>
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, Size> operator-(
+    vtkm::Float16 scalar, vtkm::Vec<vtkm::Float16, Size> a
 )
 {
   for (int i = 0; i < Size; ++i)
@@ -430,6 +575,32 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, Size> operator/(
   return a;
 }
 
+// Vec_Scalar for ['T', 'vtkm::Float16']
+template <typename T, IdComponent Size>
+inline VTKM_EXEC_CONT vtkm::Vec<T, Size> operator/(
+    vtkm::Vec<T, Size> a, vtkm::Float16 scalar
+)
+{
+  for (int i = 0; i < Size; ++i)
+  {
+    a[i] = a[i] / scalar;
+  }
+  return a;
+}
+
+// Vec_Scalar for ['vtkm::Float16', 'vtkm::Float16']
+template <IdComponent Size>
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, Size> operator/(
+    vtkm::Vec<vtkm::Float16, Size> a, vtkm::Float16 scalar
+)
+{
+  for (int i = 0; i < Size; ++i)
+  {
+    a[i] = a[i] / scalar;
+  }
+  return a;
+}
+
 // Scalar_Vec for ['T', 'T']
 template <typename T, IdComponent Size>
 inline VTKM_EXEC_CONT vtkm::Vec<T, Size> operator/(
@@ -460,6 +631,32 @@ inline VTKM_EXEC_CONT vtkm::Vec<T, Size> operator/(
 template <IdComponent Size>
 inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, Size> operator/(
     vtkm::Float64 scalar, vtkm::Vec<vtkm::Float64, Size> a
+)
+{
+  for (int i = 0; i < Size; ++i)
+  {
+    a[i] = scalar / a[i];
+  }
+  return a;
+}
+
+// Scalar_Vec for ['T', 'vtkm::Float16']
+template <typename T, IdComponent Size>
+inline VTKM_EXEC_CONT vtkm::Vec<T, Size> operator/(
+    vtkm::Float16 scalar, vtkm::Vec<T, Size> a
+)
+{
+  for (int i = 0; i < Size; ++i)
+  {
+    a[i] = scalar / a[i];
+  }
+  return a;
+}
+
+// Scalar_Vec for ['vtkm::Float16', 'vtkm::Float16']
+template <IdComponent Size>
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, Size> operator/(
+    vtkm::Float16 scalar, vtkm::Vec<vtkm::Float16, Size> a
 )
 {
   for (int i = 0; i < Size; ++i)
@@ -507,6 +704,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 1> operator+(
   return vtkm::Vec<vtkm::Float64, 1>(a[0] + scalar);
 }
 
+// Vec_Scalar for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 1> operator+(
+    const vtkm::Vec<T, 1>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<T, 1>(a[0] + scalar);
+}
+
+// Vec_Scalar for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 1> operator+(
+    const vtkm::Vec<vtkm::Float16, 1>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<vtkm::Float16, 1>(a[0] + scalar);
+}
+
 // Scalar_Vec for ['T', 'T']
 template <typename T>
 inline VTKM_EXEC_CONT vtkm::Vec<T, 1> operator+(
@@ -531,6 +745,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 1> operator+(
 )
 {
   return vtkm::Vec<vtkm::Float64, 1>(scalar + a[0]);
+}
+
+// Scalar_Vec for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 1> operator+(
+    vtkm::Float16 scalar, const vtkm::Vec<T, 1>& a
+)
+{
+  return vtkm::Vec<T, 1>(scalar + a[0]);
+}
+
+// Scalar_Vec for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 1> operator+(
+    vtkm::Float16 scalar, const vtkm::Vec<vtkm::Float16, 1>& a
+)
+{
+  return vtkm::Vec<vtkm::Float16, 1>(scalar + a[0]);
 }
 
 // Vec_Vec for ['T', 'T']
@@ -568,6 +799,24 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 2> operator+(
   return vtkm::Vec<vtkm::Float64, 2>(a[0] + scalar, a[1] + scalar);
 }
 
+// Vec_Scalar for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 2> operator+(
+    const vtkm::Vec<T, 2>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<T, 2>(a[0] + scalar, a[1] + scalar);
+}
+
+// Vec_Scalar for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 2> operator+(
+    const vtkm::Vec<vtkm::Float16, 2>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<vtkm::Float16, 2>(a[0] + scalar, a[1] + scalar);
+}
+
+
 // Scalar_Vec for ['T', 'T']
 template <typename T>
 inline VTKM_EXEC_CONT vtkm::Vec<T, 2> operator+(
@@ -592,6 +841,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 2> operator+(
 )
 {
   return vtkm::Vec<vtkm::Float64, 2>(scalar + a[0], scalar + a[1]);
+}
+
+// Scalar_Vec for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 2> operator+(
+    vtkm::Float16 scalar, const vtkm::Vec<T, 2>& a
+)
+{
+  return vtkm::Vec<T, 2>(scalar + a[0], scalar + a[1]);
+}
+
+// Scalar_Vec for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 2> operator+(
+    vtkm::Float16 scalar, const vtkm::Vec<vtkm::Float16, 2>& a
+)
+{
+  return vtkm::Vec<vtkm::Float16, 2>(scalar + a[0], scalar + a[1]);
 }
 
 // Vec_Vec for ['T', 'T']
@@ -629,6 +895,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 3> operator+(
   return vtkm::Vec<vtkm::Float64, 3>(a[0] + scalar, a[1] + scalar, a[2] + scalar);
 }
 
+// Vec_Scalar for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 3> operator+(
+    const vtkm::Vec<T, 3>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<T, 3>(a[0] + scalar, a[1] + scalar, a[2] + scalar);
+}
+
+// Vec_Scalar for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 3> operator+(
+    const vtkm::Vec<vtkm::Float16, 3>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<vtkm::Float16, 3>(a[0] + scalar, a[1] + scalar, a[2] + scalar);
+}
+
 // Scalar_Vec for ['T', 'T']
 template <typename T>
 inline VTKM_EXEC_CONT vtkm::Vec<T, 3> operator+(
@@ -653,6 +936,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 3> operator+(
 )
 {
   return vtkm::Vec<vtkm::Float64, 3>(scalar + a[0], scalar + a[1], scalar + a[2]);
+}
+
+// Scalar_Vec for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 3> operator+(
+    vtkm::Float16 scalar, const vtkm::Vec<T, 3>& a
+)
+{
+  return vtkm::Vec<T, 3>(scalar + a[0], scalar + a[1], scalar + a[2]);
+}
+
+// Scalar_Vec for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 3> operator+(
+    vtkm::Float16 scalar, const vtkm::Vec<vtkm::Float16, 3>& a
+)
+{
+  return vtkm::Vec<vtkm::Float16, 3>(scalar + a[0], scalar + a[1], scalar + a[2]);
 }
 
 // Vec_Vec for ['T', 'T']
@@ -690,6 +990,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 4> operator+(
   return vtkm::Vec<vtkm::Float64, 4>(a[0] + scalar, a[1] + scalar, a[2] + scalar, a[3] + scalar);
 }
 
+// Vec_Scalar for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 4> operator+(
+    const vtkm::Vec<T, 4>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<T, 4>(a[0] + scalar, a[1] + scalar, a[2] + scalar, a[3] + scalar);
+}
+
+// Vec_Scalar for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 4> operator+(
+    const vtkm::Vec<vtkm::Float16, 4>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<vtkm::Float16, 4>(a[0] + scalar, a[1] + scalar, a[2] + scalar, a[3] + scalar);
+}
+
 // Scalar_Vec for ['T', 'T']
 template <typename T>
 inline VTKM_EXEC_CONT vtkm::Vec<T, 4> operator+(
@@ -714,6 +1031,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 4> operator+(
 )
 {
   return vtkm::Vec<vtkm::Float64, 4>(scalar + a[0], scalar + a[1], scalar + a[2], scalar + a[3]);
+}
+
+// Scalar_Vec for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 4> operator+(
+    vtkm::Float16 scalar, const vtkm::Vec<T, 4>& a
+)
+{
+  return vtkm::Vec<T, 4>(scalar + a[0], scalar + a[1], scalar + a[2], scalar + a[3]);
+}
+
+// Scalar_Vec for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 4> operator+(
+    vtkm::Float16 scalar, const vtkm::Vec<vtkm::Float16, 4>& a
+)
+{
+  return vtkm::Vec<vtkm::Float16, 4>(scalar + a[0], scalar + a[1], scalar + a[2], scalar + a[3]);
 }
 
 //}}}
@@ -753,6 +1087,24 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 1> operator*(
   return vtkm::Vec<vtkm::Float64, 1>(a[0] * scalar);
 }
 
+// Vec_Scalar for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 1> operator*(
+    const vtkm::Vec<T, 1>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<T, 1>(a[0] * scalar);
+}
+
+// Vec_Scalar for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 1> operator*(
+    const vtkm::Vec<vtkm::Float16, 1>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<vtkm::Float16, 1>(a[0] * scalar);
+}
+
+
 // Scalar_Vec for ['T', 'T']
 template <typename T>
 inline VTKM_EXEC_CONT vtkm::Vec<T, 1> operator*(
@@ -777,6 +1129,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 1> operator*(
 )
 {
   return vtkm::Vec<vtkm::Float64, 1>(scalar * a[0]);
+}
+
+// Scalar_Vec for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 1> operator*(
+    vtkm::Float16 scalar, const vtkm::Vec<T, 1>& a
+)
+{
+  return vtkm::Vec<T, 1>(scalar * a[0]);
+}
+
+// Scalar_Vec for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 1> operator*(
+    vtkm::Float16 scalar, const vtkm::Vec<vtkm::Float16, 1>& a
+)
+{
+  return vtkm::Vec<vtkm::Float16, 1>(scalar * a[0]);
 }
 
 // Vec_Vec for ['T', 'T']
@@ -814,6 +1183,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 2> operator*(
   return vtkm::Vec<vtkm::Float64, 2>(a[0] * scalar, a[1] * scalar);
 }
 
+// Vec_Scalar for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 2> operator*(
+    const vtkm::Vec<T, 2>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<T, 2>(a[0] * scalar, a[1] * scalar);
+}
+
+// Vec_Scalar for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 2> operator*(
+    const vtkm::Vec<vtkm::Float16, 2>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<vtkm::Float16, 2>(a[0] * scalar, a[1] * scalar);
+}
+
 // Scalar_Vec for ['T', 'T']
 template <typename T>
 inline VTKM_EXEC_CONT vtkm::Vec<T, 2> operator*(
@@ -838,6 +1224,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 2> operator*(
 )
 {
   return vtkm::Vec<vtkm::Float64, 2>(scalar * a[0], scalar * a[1]);
+}
+
+// Scalar_Vec for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 2> operator*(
+    vtkm::Float16 scalar, const vtkm::Vec<T, 2>& a
+)
+{
+  return vtkm::Vec<T, 2>(scalar * a[0], scalar * a[1]);
+}
+
+// Scalar_Vec for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 2> operator*(
+    vtkm::Float16 scalar, const vtkm::Vec<vtkm::Float16, 2>& a
+)
+{
+  return vtkm::Vec<vtkm::Float16, 2>(scalar * a[0], scalar * a[1]);
 }
 
 // Vec_Vec for ['T', 'T']
@@ -875,6 +1278,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 3> operator*(
   return vtkm::Vec<vtkm::Float64, 3>(a[0] * scalar, a[1] * scalar, a[2] * scalar);
 }
 
+// Vec_Scalar for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 3> operator*(
+    const vtkm::Vec<T, 3>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<T, 3>(a[0] * scalar, a[1] * scalar, a[2] * scalar);
+}
+
+// Vec_Scalar for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 3> operator*(
+    const vtkm::Vec<vtkm::Float16, 3>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<vtkm::Float16, 3>(a[0] * scalar, a[1] * scalar, a[2] * scalar);
+}
+
 // Scalar_Vec for ['T', 'T']
 template <typename T>
 inline VTKM_EXEC_CONT vtkm::Vec<T, 3> operator*(
@@ -899,6 +1319,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 3> operator*(
 )
 {
   return vtkm::Vec<vtkm::Float64, 3>(scalar * a[0], scalar * a[1], scalar * a[2]);
+}
+
+// Scalar_Vec for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 3> operator*(
+    vtkm::Float16 scalar, const vtkm::Vec<T, 3>& a
+)
+{
+  return vtkm::Vec<T, 3>(scalar * a[0], scalar * a[1], scalar * a[2]);
+}
+
+// Scalar_Vec for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 3> operator*(
+    vtkm::Float16 scalar, const vtkm::Vec<vtkm::Float16, 3>& a
+)
+{
+  return vtkm::Vec<vtkm::Float16, 3>(scalar * a[0], scalar * a[1], scalar * a[2]);
 }
 
 // Vec_Vec for ['T', 'T']
@@ -936,6 +1373,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 4> operator*(
   return vtkm::Vec<vtkm::Float64, 4>(a[0] * scalar, a[1] * scalar, a[2] * scalar, a[3] * scalar);
 }
 
+// Vec_Scalar for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 4> operator*(
+    const vtkm::Vec<T, 4>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<T, 4>(a[0] * scalar, a[1] * scalar, a[2] * scalar, a[3] * scalar);
+}
+
+// Vec_Scalar for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 4> operator*(
+    const vtkm::Vec<vtkm::Float16, 4>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<vtkm::Float16, 4>(a[0] * scalar, a[1] * scalar, a[2] * scalar, a[3] * scalar);
+}
+
 // Scalar_Vec for ['T', 'T']
 template <typename T>
 inline VTKM_EXEC_CONT vtkm::Vec<T, 4> operator*(
@@ -960,6 +1414,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 4> operator*(
 )
 {
   return vtkm::Vec<vtkm::Float64, 4>(scalar * a[0], scalar * a[1], scalar * a[2], scalar * a[3]);
+}
+
+// Scalar_Vec for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 4> operator*(
+    vtkm::Float16 scalar, const vtkm::Vec<T, 4>& a
+)
+{
+  return vtkm::Vec<T, 4>(scalar * a[0], scalar * a[1], scalar * a[2], scalar * a[3]);
+}
+
+// Scalar_Vec for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 4> operator*(
+    vtkm::Float16 scalar, const vtkm::Vec<vtkm::Float16, 4>& a
+)
+{
+  return vtkm::Vec<vtkm::Float16, 4>(scalar * a[0], scalar * a[1], scalar * a[2], scalar * a[3]);
 }
 
 //}}}
@@ -999,6 +1470,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 1> operator-(
   return vtkm::Vec<vtkm::Float64, 1>(a[0] - scalar);
 }
 
+// Vec_Scalar for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 1> operator-(
+    const vtkm::Vec<T, 1>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<T, 1>(a[0] - scalar);
+}
+
+// Vec_Scalar for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 1> operator-(
+    const vtkm::Vec<vtkm::Float16, 1>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<vtkm::Float16, 1>(a[0] - scalar);
+}
+
 // Scalar_Vec for ['T', 'T']
 template <typename T>
 inline VTKM_EXEC_CONT vtkm::Vec<T, 1> operator-(
@@ -1023,6 +1511,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 1> operator-(
 )
 {
   return vtkm::Vec<vtkm::Float64, 1>(scalar - a[0]);
+}
+
+// Scalar_Vec for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 1> operator-(
+    vtkm::Float16 scalar, const vtkm::Vec<T, 1>& a
+)
+{
+  return vtkm::Vec<T, 1>(scalar - a[0]);
+}
+
+// Scalar_Vec for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 1> operator-(
+    vtkm::Float16 scalar, const vtkm::Vec<vtkm::Float16, 1>& a
+)
+{
+  return vtkm::Vec<vtkm::Float16, 1>(scalar - a[0]);
 }
 
 // Vec_Vec for ['T', 'T']
@@ -1060,6 +1565,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 2> operator-(
   return vtkm::Vec<vtkm::Float64, 2>(a[0] - scalar, a[1] - scalar);
 }
 
+// Vec_Scalar for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 2> operator-(
+    const vtkm::Vec<T, 2>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<T, 2>(a[0] - scalar, a[1] - scalar);
+}
+
+// Vec_Scalar for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 2> operator-(
+    const vtkm::Vec<vtkm::Float16, 2>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<vtkm::Float16, 2>(a[0] - scalar, a[1] - scalar);
+}
+
 // Scalar_Vec for ['T', 'T']
 template <typename T>
 inline VTKM_EXEC_CONT vtkm::Vec<T, 2> operator-(
@@ -1084,6 +1606,24 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 2> operator-(
 )
 {
   return vtkm::Vec<vtkm::Float64, 2>(scalar - a[0], scalar - a[1]);
+}
+
+
+// Scalar_Vec for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 2> operator-(
+    vtkm::Float16 scalar, const vtkm::Vec<T, 2>& a
+)
+{
+  return vtkm::Vec<T, 2>(scalar - a[0], scalar - a[1]);
+}
+
+// Scalar_Vec for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 2> operator-(
+    vtkm::Float16 scalar, const vtkm::Vec<vtkm::Float16, 2>& a
+)
+{
+  return vtkm::Vec<vtkm::Float16, 2>(scalar - a[0], scalar - a[1]);
 }
 
 // Vec_Vec for ['T', 'T']
@@ -1121,6 +1661,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 3> operator-(
   return vtkm::Vec<vtkm::Float64, 3>(a[0] - scalar, a[1] - scalar, a[2] - scalar);
 }
 
+// Vec_Scalar for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 3> operator-(
+    const vtkm::Vec<T, 3>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<T, 3>(a[0] - scalar, a[1] - scalar, a[2] - scalar);
+}
+
+// Vec_Scalar for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 3> operator-(
+    const vtkm::Vec<vtkm::Float16, 3>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<vtkm::Float16, 3>(a[0] - scalar, a[1] - scalar, a[2] - scalar);
+}
+
 // Scalar_Vec for ['T', 'T']
 template <typename T>
 inline VTKM_EXEC_CONT vtkm::Vec<T, 3> operator-(
@@ -1146,6 +1703,24 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 3> operator-(
 {
   return vtkm::Vec<vtkm::Float64, 3>(scalar - a[0], scalar - a[1], scalar - a[2]);
 }
+
+// Scalar_Vec for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 3> operator-(
+    vtkm::Float16 scalar, const vtkm::Vec<T, 3>& a
+)
+{
+  return vtkm::Vec<T, 3>(scalar - a[0], scalar - a[1], scalar - a[2]);
+}
+
+// Scalar_Vec for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 3> operator-(
+    vtkm::Float16 scalar, const vtkm::Vec<vtkm::Float16, 3>& a
+)
+{
+  return vtkm::Vec<vtkm::Float16, 3>(scalar - a[0], scalar - a[1], scalar - a[2]);
+}
+
 
 // Vec_Vec for ['T', 'T']
 template <typename T>
@@ -1182,6 +1757,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 4> operator-(
   return vtkm::Vec<vtkm::Float64, 4>(a[0] - scalar, a[1] - scalar, a[2] - scalar, a[3] - scalar);
 }
 
+// Vec_Scalar for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 4> operator-(
+    const vtkm::Vec<T, 4>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<T, 4>(a[0] - scalar, a[1] - scalar, a[2] - scalar, a[3] - scalar);
+}
+
+// Vec_Scalar for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 4> operator-(
+    const vtkm::Vec<vtkm::Float16, 4>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<vtkm::Float16, 4>(a[0] - scalar, a[1] - scalar, a[2] - scalar, a[3] - scalar);
+}
+
 // Scalar_Vec for ['T', 'T']
 template <typename T>
 inline VTKM_EXEC_CONT vtkm::Vec<T, 4> operator-(
@@ -1207,6 +1799,24 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 4> operator-(
 {
   return vtkm::Vec<vtkm::Float64, 4>(scalar - a[0], scalar - a[1], scalar - a[2], scalar - a[3]);
 }
+
+// Scalar_Vec for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 4> operator-(
+    vtkm::Float16 scalar, const vtkm::Vec<T, 4>& a
+)
+{
+  return vtkm::Vec<T, 4>(scalar - a[0], scalar - a[1], scalar - a[2], scalar - a[3]);
+}
+
+// Scalar_Vec for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 4> operator-(
+    vtkm::Float16 scalar, const vtkm::Vec<vtkm::Float16, 4>& a
+)
+{
+  return vtkm::Vec<vtkm::Float16, 4>(scalar - a[0], scalar - a[1], scalar - a[2], scalar - a[3]);
+}
+
 
 //}}}
 // operator/ overloads for specific vector sizes -------------------{{{
@@ -1245,6 +1855,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 1> operator/(
   return vtkm::Vec<vtkm::Float64, 1>(a[0] / scalar);
 }
 
+// Vec_Scalar for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 1> operator/(
+    const vtkm::Vec<T, 1>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<T, 1>(a[0] / scalar);
+}
+
+// Vec_Scalar for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 1> operator/(
+    const vtkm::Vec<vtkm::Float16, 1>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<vtkm::Float16, 1>(a[0] / scalar);
+}
+
 // Scalar_Vec for ['T', 'T']
 template <typename T>
 inline VTKM_EXEC_CONT vtkm::Vec<T, 1> operator/(
@@ -1269,6 +1896,24 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 1> operator/(
 )
 {
   return vtkm::Vec<vtkm::Float64, 1>(scalar / a[0]);
+}
+
+
+// Scalar_Vec for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 1> operator/(
+    vtkm::Float16 scalar, const vtkm::Vec<T, 1>& a
+)
+{
+  return vtkm::Vec<T, 1>(scalar / a[0]);
+}
+
+// Scalar_Vec for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 1> operator/(
+    vtkm::Float16 scalar, const vtkm::Vec<vtkm::Float16, 1>& a
+)
+{
+  return vtkm::Vec<vtkm::Float16, 1>(scalar / a[0]);
 }
 
 // Vec_Vec for ['T', 'T']
@@ -1306,6 +1951,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 2> operator/(
   return vtkm::Vec<vtkm::Float64, 2>(a[0] / scalar, a[1] / scalar);
 }
 
+// Vec_Scalar for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 2> operator/(
+    const vtkm::Vec<T, 2>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<T, 2>(a[0] / scalar, a[1] / scalar);
+}
+
+// Vec_Scalar for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 2> operator/(
+    const vtkm::Vec<vtkm::Float16, 2>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<vtkm::Float16, 2>(a[0] / scalar, a[1] / scalar);
+}
+
 // Scalar_Vec for ['T', 'T']
 template <typename T>
 inline VTKM_EXEC_CONT vtkm::Vec<T, 2> operator/(
@@ -1330,6 +1992,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 2> operator/(
 )
 {
   return vtkm::Vec<vtkm::Float64, 2>(scalar / a[0], scalar / a[1]);
+}
+
+// Scalar_Vec for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 2> operator/(
+    vtkm::Float16 scalar, const vtkm::Vec<T, 2>& a
+)
+{
+  return vtkm::Vec<T, 2>(scalar / a[0], scalar / a[1]);
+}
+
+// Scalar_Vec for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 2> operator/(
+    vtkm::Float16 scalar, const vtkm::Vec<vtkm::Float16, 2>& a
+)
+{
+  return vtkm::Vec<vtkm::Float16, 2>(scalar / a[0], scalar / a[1]);
 }
 
 // Vec_Vec for ['T', 'T']
@@ -1367,6 +2046,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 3> operator/(
   return vtkm::Vec<vtkm::Float64, 3>(a[0] / scalar, a[1] / scalar, a[2] / scalar);
 }
 
+// Vec_Scalar for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 3> operator/(
+    const vtkm::Vec<T, 3>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<T, 3>(a[0] / scalar, a[1] / scalar, a[2] / scalar);
+}
+
+// Vec_Scalar for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 3> operator/(
+    const vtkm::Vec<vtkm::Float16, 3>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<vtkm::Float16, 3>(a[0] / scalar, a[1] / scalar, a[2] / scalar);
+}
+
 // Scalar_Vec for ['T', 'T']
 template <typename T>
 inline VTKM_EXEC_CONT vtkm::Vec<T, 3> operator/(
@@ -1391,6 +2087,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 3> operator/(
 )
 {
   return vtkm::Vec<vtkm::Float64, 3>(scalar / a[0], scalar / a[1], scalar / a[2]);
+}
+
+// Scalar_Vec for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 3> operator/(
+    vtkm::Float16 scalar, const vtkm::Vec<T, 3>& a
+)
+{
+  return vtkm::Vec<T, 3>(scalar / a[0], scalar / a[1], scalar / a[2]);
+}
+
+// Scalar_Vec for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 3> operator/(
+    vtkm::Float16 scalar, const vtkm::Vec<vtkm::Float16, 3>& a
+)
+{
+  return vtkm::Vec<vtkm::Float16, 3>(scalar / a[0], scalar / a[1], scalar / a[2]);
 }
 
 // Vec_Vec for ['T', 'T']
@@ -1428,6 +2141,24 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 4> operator/(
   return vtkm::Vec<vtkm::Float64, 4>(a[0] / scalar, a[1] / scalar, a[2] / scalar, a[3] / scalar);
 }
 
+// Vec_Scalar for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 4> operator/(
+    const vtkm::Vec<T, 4>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<T, 4>(a[0] / scalar, a[1] / scalar, a[2] / scalar, a[3] / scalar);
+}
+
+// Vec_Scalar for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 4> operator/(
+    const vtkm::Vec<vtkm::Float16, 4>& a, vtkm::Float16 scalar
+)
+{
+  return vtkm::Vec<vtkm::Float16, 4>(a[0] / scalar, a[1] / scalar, a[2] / scalar, a[3] / scalar);
+}
+
+
 // Scalar_Vec for ['T', 'T']
 template <typename T>
 inline VTKM_EXEC_CONT vtkm::Vec<T, 4> operator/(
@@ -1452,6 +2183,23 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float64, 4> operator/(
 )
 {
   return vtkm::Vec<vtkm::Float64, 4>(scalar / a[0], scalar / a[1], scalar / a[2], scalar / a[3]);
+}
+
+// Scalar_Vec for ['T', 'vtkm::Float16']
+template <typename T>
+inline VTKM_EXEC_CONT vtkm::Vec<T, 4> operator/(
+    vtkm::Float16 scalar, const vtkm::Vec<T, 4>& a
+)
+{
+  return vtkm::Vec<T, 4>(scalar / a[0], scalar / a[1], scalar / a[2], scalar / a[3]);
+}
+
+// Scalar_Vec for ['vtkm::Float16', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 4> operator/(
+    vtkm::Float16 scalar, const vtkm::Vec<vtkm::Float16, 4>& a
+)
+{
+  return vtkm::Vec<vtkm::Float16, 4>(scalar / a[0], scalar / a[1], scalar / a[2], scalar / a[3]);
 }
 
 //}}}

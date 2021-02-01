@@ -44,25 +44,6 @@ public:
   }
 
   VTKM_EXEC_CONT
-  ArrayPortalUniformPointCoordinatesFP16(const ArrayPortalUniformPointCoordinatesFP16& src)
-    : Dimensions(src.Dimensions)
-    , NumberOfValues(src.NumberOfValues)
-    , Origin(src.Origin)
-    , Spacing(src.Spacing)
-  {
-  }
-
-  VTKM_EXEC_CONT
-  ArrayPortalUniformPointCoordinatesFP16& operator=(const ArrayPortalUniformPointCoordinatesFP16& src)
-  {
-    this->Dimensions = src.Dimensions;
-    this->NumberOfValues = src.NumberOfValues;
-    this->Origin = src.Origin;
-    this->Spacing = src.Spacing;
-    return *this;
-  }
-
-  VTKM_EXEC_CONT
   vtkm::Id GetNumberOfValues() const { return this->NumberOfValues; }
 
   VTKM_EXEC_CONT
@@ -84,12 +65,11 @@ public:
     VTKM_ASSERT((index[0] >= 0) && (index[1] >= 0) && (index[2] >= 0));
     VTKM_ASSERT((index[0] < this->Dimensions[0]) && (index[1] < this->Dimensions[1]) &&
                 (index[2] < this->Dimensions[2]));
-    return ValueType(this->Origin[0]);
+	return ValueType(this->Origin[0]);
     /*return ValueType(this->Origin[0] + this->Spacing[0] * static_cast<vtkm::Float16>(index[0]),
                      this->Origin[1] + this->Spacing[1] * static_cast<vtkm::Float16>(index[1]),
                      this->Origin[2] +
-  		     this->Spacing[2] * static_cast<vtkm::Float16>(index[2]));
-		     */
+                       this->Spacing[2] * static_cast<vtkm::Float16>(index[2]));*/
   }
 
   VTKM_EXEC_CONT

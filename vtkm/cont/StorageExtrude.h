@@ -16,6 +16,9 @@
 
 #include <vtkm/cont/ErrorBadType.h>
 
+#include <vtkm/cont/internal/ArrayTransfer.h>
+#include <vtkm/cont/internal/StorageDeprecated.h>
+
 #include <vtkm/cont/serial/DeviceAdapterSerial.h>
 #include <vtkm/cont/tbb/DeviceAdapterTBB.h>
 
@@ -159,6 +162,8 @@ public:
 private:
   vtkm::cont::ArrayHandle<T> Array;
   vtkm::Int32 NumberOfPlanes;
+
+  VTKM_STORAGE_OLD_STYLE;
 };
 
 template <typename T, typename Device>
@@ -451,6 +456,8 @@ public:
 private:
   vtkm::Int32 NumberOfPlanes;
   bool UseCylindrical;
+
+  VTKM_STORAGE_OLD_STYLE;
 };
 
 template <typename T, typename Device>

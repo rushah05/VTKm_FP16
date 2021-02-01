@@ -16,6 +16,8 @@
 #include <vtkm/cont/ErrorExecution.h>
 #include <vtkm/cont/Logging.h>
 
+#include <vtkm/cont/internal/ArrayHandleDeprecated.h>
+
 #include <vtkm/cont/vtkm_cont_export.h>
 
 // TODO: When virtual arrays are available, compile the implementation in a .cxx/.cu file. Common
@@ -149,12 +151,18 @@ VTKM_CONT void ArrayCopy(const vtkm::cont::ArrayHandle<InValueType, InStorage>& 
                          "Cannot copy to a read-only array with a different "
                          "type than the source.");
 
-  using IsNewStyle =
-    std::is_base_of<vtkm::cont::ArrayHandleNewStyle<InValueType, InStorage>, InArrayType>;
+  using IsOldStyle =
+    std::is_base_of<vtkm::cont::internal::ArrayHandleDeprecated<InValueType, InStorage>,
+                    InArrayType>;
 
   // Static dispatch cases 1 & 2
-  detail::ArrayCopyImpl(source, destination, std::integral_constant<bool, IsNewStyle::value>{});
+  detail::ArrayCopyImpl(source, destination, std::integral_constant<bool, !IsOldStyle::value>{});
 }
+
+// Forward declaration
+// Cannot include UncertainArrayHandle.h here due to circular dependency.
+template <typename ValueList, typename StorageList>
+class UncertainArrayHandle;
 
 // Forward declaration
 // Cannot include VariantArrayHandle.h here due to circular dependency.
@@ -175,6 +183,19 @@ struct ArrayCopyFunctor
 };
 
 } // namespace detail
+
+/// \brief Deep copies data in an `UncertainArrayHandle` to an array of a known type.
+///
+/// This form of `ArrayCopy` can be used to copy data from an unknown array type to
+/// an array of a known type. Note that regardless of the source type, the data will
+/// be deep copied.
+///
+template <typename InValueList, typename InStorageList, typename OutValue, typename OutStorage>
+VTKM_CONT void ArrayCopy(const vtkm::cont::UncertainArrayHandle<InValueList, InStorageList>& src,
+                         vtkm::cont::ArrayHandle<OutValue, OutStorage>& dest)
+{
+  src.CastAndCall(detail::ArrayCopyFunctor{}, dest);
+}
 
 /// \brief Deep copies data in a `VariantArrayHandle` to an array of a known type.
 ///
