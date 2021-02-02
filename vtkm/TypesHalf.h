@@ -104,6 +104,16 @@ public:
    return TypesHalf(hostH2F( hostF2H(cudaH2F(data)) + hostF2H(cudaH2F(h.get())) ));
 #endif
  }
+
+
+  VTKM_EXEC_CONT
+  TypesHalf operator += (const TypesHalf& h) const{
+#ifdef  __CUDA_ARCH__
+   return TypesHalf(__hadd(h.get(), data));
+#else
+   return TypesHalf(hostH2F( hostF2H(cudaH2F(data)) + hostF2H(cudaH2F(h.get())) ));
+#endif
+ }
  
 
  VTKM_EXEC_CONT
@@ -190,6 +200,59 @@ bool operator > (TypesHalf& h1){
 #endif
  }
 
+VTKM_EXEC_CONT
+bool operator <= (TypesHalf& h1){
+#ifdef  __CUDA_ARCH__
+   return cudaH2F(data) <= h1.to_float();
+#else
+   return cudaH2F(data) <= cudaH2F(h1.get());
+#endif
+ }
+
+VTKM_EXEC_CONT
+bool operator <= (const TypesHalf& h1){
+#ifdef  __CUDA_ARCH__
+   return cudaH2F(data) <= h1.to_float();
+#else
+   return cudaH2F(data) <= cudaH2F(h1.get());
+#endif
+ }
+
+VTKM_EXEC_CONT
+bool operator <= (const TypesHalf& h1) const{
+#ifdef  __CUDA_ARCH__
+   return cudaH2F(data) <= h1.to_float();
+#else
+   return cudaH2F(data) <= cudaH2F(h1.get());
+#endif
+ }
+
+VTKM_EXEC_CONT
+bool operator >= (const TypesHalf& h1) const{
+#ifdef  __CUDA_ARCH__
+   return cudaH2F(data) >= h1.to_float();
+#else
+   return cudaH2F(data) >= cudaH2F(h1.get());
+#endif
+ }
+
+VTKM_EXEC_CONT
+bool operator >= (const TypesHalf& h1){
+#ifdef  __CUDA_ARCH__
+   return cudaH2F(data) >= h1.to_float();
+#else
+   return cudaH2F(data) >= cudaH2F(h1.get());
+#endif
+ }
+
+VTKM_EXEC_CONT
+bool operator >= (TypesHalf& h1){
+#ifdef  __CUDA_ARCH__
+   return cudaH2F(data) >= h1.to_float();
+#else
+   return cudaH2F(data) >= cudaH2F(h1.get());
+#endif
+ }
 
 VTKM_EXEC_CONT
  TypesHalf& operator=(float rhs) {
