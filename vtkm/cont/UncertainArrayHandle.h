@@ -162,8 +162,8 @@ struct UncertainArrayHandleSerializeFunctor
   template <typename ArrayHandleType>
   void operator()(const ArrayHandleType& ah, BinaryBuffer& bb) const
   {
-    vtkmdiy::save(bb, vtkm::cont::SerializableTypeString<ArrayHandleType>::Get());
-    vtkmdiy::save(bb, ah);
+    //vtkmdiy::save(bb, vtkm::cont::SerializableTypeString<ArrayHandleType>::Get());
+    //vtkmdiy::save(bb, ah);
   }
 };
 
@@ -181,7 +181,7 @@ struct UncertainArrayHandleDeserializeFunctor
     if (!success && (typeString == vtkm::cont::SerializableTypeString<ArrayHandleType>::Get()))
     {
       ArrayHandleType knownArray;
-      vtkmdiy::load(bb, knownArray);
+      //vtkmdiy::load(bb, knownArray);
       unknownArray = knownArray;
       success = true;
     }

@@ -58,7 +58,7 @@ using UnknownSerializationStorage =
                               vtkm::cont::StorageTagReverse<vtkm::cont::StorageTagBasic>,
                               vtkm::cont::StorageTagSOA,
                               vtkm::cont::StorageTagUniformPoints,
-			      vtkm::cont::StorageTagUniformPointsFP16>>;
+                              vtkm::cont::StorageTagUniformPointsFP16>>;
 
 } // anonymous namespace
 
