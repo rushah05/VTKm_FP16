@@ -12,6 +12,7 @@ set(headers
   CommonState.h
   FieldPropagation.h
   FlyingEdges.h
+  FlyingEdgesFP16.h
   FlyingEdgesHelpers.h
   FlyingEdgesPass1.h
   FlyingEdgesPass2.h

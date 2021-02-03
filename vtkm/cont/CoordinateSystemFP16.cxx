@@ -60,10 +60,10 @@ VTKM_CONT vtkm::cont::detail::CoordDataDepWrapperFP16 CoordinateSystemFP16::GetD
   return vtkm::cont::detail::CoordDataDepWrapperFP16(this->Superclass::GetData());
 }
 #else  //!VTKM_NO_DEPRECATED_VIRTUAL
-VTKM_CONT vtkm::cont::UncertainArrayHandle<vtkm::TypeListFieldVec3_FP16, VTKM_DEFAULT_STORAGE_LIST>
+VTKM_CONT vtkm::cont::UncertainArrayHandle<vtkm::List<vtkm::Vec3f_16>, VTKM_DEFAULT_STORAGE_LIST>
 CoordinateSystemFP16::GetData() const
 {
-  return vtkm::cont::UncertainArrayHandle<vtkm::TypeListFieldVec3_FP16, VTKM_DEFAULT_STORAGE_LIST>(
+  return vtkm::cont::UncertainArrayHandle<vtkm::List<vtkm::Vec3f_16>, VTKM_DEFAULT_STORAGE_LIST>(
     this->Superclass::GetData());
 }
 #endif //!VTKM_NO_DEPRECATED_VIRTUAL

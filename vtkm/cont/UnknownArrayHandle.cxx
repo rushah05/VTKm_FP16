@@ -303,16 +303,17 @@ namespace mangled_diy_namespace
 void Serialization<vtkm::cont::UnknownArrayHandle>::save(BinaryBuffer& bb,
                                                          const vtkm::cont::UnknownArrayHandle& obj)
 {
-  vtkmdiy::save(bb, obj.ResetTypes<UnknownSerializationTypes, UnknownSerializationStorage>());
+  //vtkmdiy::save(bb, obj.ResetTypes<UnknownSerializationTypes, UnknownSerializationStorage>());
 }
 
 void Serialization<vtkm::cont::UnknownArrayHandle>::load(BinaryBuffer& bb,
                                                          vtkm::cont::UnknownArrayHandle& obj)
 {
-  vtkm::cont::UncertainArrayHandle<UnknownSerializationTypes, UnknownSerializationStorage>
+  /*vtkm::cont::UncertainArrayHandle<UnknownSerializationTypes, UnknownSerializationStorage>
     uncertainArray;
   vtkmdiy::load(bb, uncertainArray);
   obj = uncertainArray;
+ */
 }
 
 } // namespace mangled_diy_namespace

@@ -198,12 +198,12 @@ struct Serialization<vtkm::cont::UncertainArrayHandle<ValueTypeList, StorageType
 public:
   static VTKM_CONT void save(BinaryBuffer& bb, const Type& obj)
   {
-    obj.CastAndCall(internal::UncertainArrayHandleSerializeFunctor{}, bb);
+    //obj.CastAndCall(internal::UncertainArrayHandleSerializeFunctor{}, bb);
   }
 
   static VTKM_CONT void load(BinaryBuffer& bb, Type& obj)
   {
-    std::string typeString;
+    /*std::string typeString;
     vtkmdiy::load(bb, typeString);
 
     bool success = false;
@@ -218,7 +218,7 @@ public:
     {
       throw vtkm::cont::ErrorBadType(
         "Error deserializing Unknown/UncertainArrayHandle. Message TypeString: " + typeString);
-    }
+    }*/
   }
 };
 

@@ -56,7 +56,7 @@ using TypeListFieldVec2 = vtkm::List<vtkm::Vec2f_32, vtkm::Vec2f_64>;
 ///
 using TypeListFieldVec3 = vtkm::List<vtkm::Vec3f_32, vtkm::Vec3f_64>;
 
-using TypeListFieldVec3_FP16 = vtkm::List<vtkm::Vec3f_16>;
+//using TypeListFieldVec3_FP16 = vtkm::List<vtkm::Vec3f_16>;
 
 /// A list containing types for values for fields with four dimensional
 /// vectors.

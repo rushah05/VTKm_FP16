@@ -38,10 +38,10 @@ namespace detail
 // supported. Once the behavior is removed (probably when
 // ArrayHandleVirtualCoordinatesFP16 is removed), then this class should be removed.
 class VTKM_ALWAYS_EXPORT CoordDataDepWrapperFP16
-  : public vtkm::cont::UncertainArrayHandle<vtkm::TypeListFieldVec3_FP16, VTKM_DEFAULT_STORAGE_LIST>
+  : public vtkm::cont::UncertainArrayHandle<vtkm::List<vtkm::Vec3f_16>, VTKM_DEFAULT_STORAGE_LIST>
 {
   using Superclass =
-    vtkm::cont::UncertainArrayHandle<vtkm::TypeListFieldVec3_FP16, VTKM_DEFAULT_STORAGE_LIST>;
+    vtkm::cont::UncertainArrayHandle<vtkm::List<vtkm::Vec3f_16>, VTKM_DEFAULT_STORAGE_LIST>;
 
   VTKM_DEPRECATED_SUPPRESS_BEGIN
   VTKM_CONT_EXPORT VTKM_CONT vtkm::cont::ArrayHandleVirtualCoordinatesFP16 ToArray() const;
@@ -155,7 +155,7 @@ public:
 #ifndef VTKM_NO_DEPRECATED_VIRTUAL
   VTKM_CONT detail::CoordDataDepWrapperFP16 GetData() const;
 #else
-  VTKM_CONT vtkm::cont::UncertainArrayHandle<vtkm::TypeListFieldVec3_FP16, VTKM_DEFAULT_STORAGE_LIST>
+  VTKM_CONT vtkm::cont::UncertainArrayHandle<vtkm::List<vtkm::Vec3f_16>, VTKM_DEFAULT_STORAGE_LIST>
   GetData() const;
 #endif
 
