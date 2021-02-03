@@ -61,6 +61,7 @@ using StorageListField = vtkm::ListAppend<
   vtkm::cont::StorageListBasic,
   vtkm::List<
     vtkm::cont::StorageTagUniformPoints,
+    vtkm::cont::StorageTagUniformPointsFP16,
     vtkm::cont::StorageTagCartesianProduct<vtkm::cont::StorageTagBasic,
                                            vtkm::cont::StorageTagBasic,
                                            vtkm::cont::StorageTagBasic>>>;

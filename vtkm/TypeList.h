@@ -56,7 +56,7 @@ using TypeListFieldVec2 = vtkm::List<vtkm::Vec2f_32, vtkm::Vec2f_64>;
 ///
 using TypeListFieldVec3 = vtkm::List<vtkm::Vec3f_32, vtkm::Vec3f_64>;
 
-using TypeListFieldVec3_FP16 = vtkm::List<vtkm::Vec3f_16>;
+//using TypeListFieldVec3_FP16 = vtkm::List<vtkm::Vec3f_16>;
 
 /// A list containing types for values for fields with four dimensional
 /// vectors.
@@ -67,10 +67,13 @@ using TypeListFieldVec4 = vtkm::List<vtkm::Vec4f_32, vtkm::Vec4f_64>;
 /// floating point vectors of size 2, 3, and 4 with floating point components.
 /// Scalars are not included.
 ///
-using TypeListFloatVec = vtkm::List<vtkm::Vec2f_32,
-                                    vtkm::Vec2f_64,
+using TypeListFloatVec = vtkm::List<vtkm::Vec2f_16,
+                                    vtkm::Vec2f_32,
+      				    vtkm::Vec2f_64,
+				    vtkm::Vec3f_16,
                                     vtkm::Vec3f_32,
                                     vtkm::Vec3f_64,
+				    vtkm::Vec4f_16,
                                     vtkm::Vec4f_32,
                                     vtkm::Vec4f_64>;
 
@@ -78,12 +81,16 @@ using TypeListFloatVec = vtkm::List<vtkm::Vec2f_32,
 /// floating point scalars and vectors of size 2, 3, and 4 with floating point
 /// components.
 ///
-using TypeListField = vtkm::List<vtkm::Float32,
+using TypeListField = vtkm::List<vtkm::Float16,
+      				 vtkm::Float32,
                                  vtkm::Float64,
+				 vtkm::Vec2f_16,
                                  vtkm::Vec2f_32,
                                  vtkm::Vec2f_64,
+				 vtkm::Vec3f_16,
                                  vtkm::Vec3f_32,
                                  vtkm::Vec3f_64,
+				 vtkm::Vec4f_16,
                                  vtkm::Vec4f_32,
                                  vtkm::Vec4f_64>;
 
@@ -103,6 +110,7 @@ using TypeListScalarAll = vtkm::List<vtkm::Int8,
                                      vtkm::UInt32,
                                      vtkm::Int64,
                                      vtkm::UInt64,
+				     vtkm::Float16,
                                      vtkm::Float32,
                                      vtkm::Float64>;
 

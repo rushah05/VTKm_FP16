@@ -1090,6 +1090,7 @@ using IdComponent4 = vtkm::Vec<vtkm::IdComponent, 4>;
 ///
 using Vec4f = vtkm::Vec<vtkm::FloatDefault, 4>;
 
+using Vec4f_16 = vtkm::Vec<vtkm::Float16, 4>;
 /// \brief Vec4f_32 corresponds to a 4-dimensional vector of 32-bit floating point values.
 ///
 /// It is typedef for vtkm::Vec<vtkm::Float32, 4>.

@@ -1148,6 +1148,14 @@ inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Float16, 1> operator*(
   return vtkm::Vec<vtkm::Float16, 1>(scalar * a[0]);
 }
 
+// Scalar_Vec for ['vtkm::Id', 'vtkm::Float16']
+inline VTKM_EXEC_CONT vtkm::Vec<vtkm::Id, 1> operator*(
+    vtkm::Id scalar, const vtkm::Vec<vtkm::Float16, 1>& a
+)
+{
+  return vtkm::Vec<vtkm::Id, 1>(scalar * a[0].to_float());
+}
+
 // Vec_Vec for ['T', 'T']
 template <typename T>
 inline VTKM_EXEC_CONT vtkm::Vec<T, 2> operator*(
