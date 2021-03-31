@@ -34,8 +34,8 @@ void VTKStructuredPointsReader::Read()
 
   // Read structured points specific meta-data
   vtkm::Id3 dim;
-  vtkm::Vec3f origin;
-  vtkm::Vec3f spacing;
+  vtkm::Vec3f_32 origin;
+  vtkm::Vec3f_32 spacing;
 
   // The specification for VTK Legacy files says the order of fields should be
   // DIMENSIONS, ORIGIN, SPACING. However, it is common for these to be in
@@ -93,10 +93,22 @@ void VTKStructuredPointsReader::Read()
     }
   }
 
-  this->DataSet.SetCellSet(internal::CreateCellSetStructured(dim));
-  this->DataSet.AddCoordinateSystem(
-    vtkm::cont::CoordinateSystem("coordinates", dim, origin, spacing));
+  vtkm::Vec3f_16 originFP16;
+  vtkm::Vec3f_16 spacingFP16;
 
+  for(int i=0; i<origin.NumComponents(); ++i)
+	  originFP16[i] = ph::TypesHalf(origin[i]);
+
+   for(int j=0; j<spacing.NumComponents(); ++j)
+          spacingFP16[j] = ph::TypesHalf(spacing[j]);
+
+
+  this->DataSet.SetCellSet(internal::CreateCellSetStructured(dim));
+  this->DataSet.AddCoordinateSystemFP16(
+    vtkm::cont::CoordinateSystemFP16("coordinates", dim, originFP16, spacingFP16));
+
+  //this->DataSet.AddCoordinateSystem(
+   // vtkm::cont::CoordinateSystem("coordinates", dim, origin, spacing));
   // Read points and cell attributes
   this->ReadAttributes();
 }

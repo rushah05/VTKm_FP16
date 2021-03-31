@@ -40,6 +40,20 @@ public:
         const vtkm::cont::Field& scalarField,
         const vtkm::rendering::Color& color);
 
+  Actor(const vtkm::cont::DynamicCellSet& cells,
+        const vtkm::cont::CoordinateSystemFP16& coordinates,
+        const vtkm::cont::Field& scalarField);
+
+  Actor(const vtkm::cont::DynamicCellSet& cells,
+        const vtkm::cont::CoordinateSystemFP16& coordinates,
+        const vtkm::cont::Field& scalarField,
+        const vtkm::cont::ColorTable& colorTable);
+
+  Actor(const vtkm::cont::DynamicCellSet& cells,
+        const vtkm::cont::CoordinateSystemFP16& coordinates,
+        const vtkm::cont::Field& scalarField,
+        const vtkm::rendering::Color& color);
+
   void Render(vtkm::rendering::Mapper& mapper,
               vtkm::rendering::Canvas& canvas,
               const vtkm::rendering::Camera& camera) const;
@@ -47,6 +61,8 @@ public:
   const vtkm::cont::DynamicCellSet& GetCells() const;
 
   const vtkm::cont::CoordinateSystem& GetCoordinates() const;
+
+  const vtkm::cont::CoordinateSystemFP16& GetCoordinatesFP16() const;
 
   const vtkm::cont::Field& GetScalarField() const;
 
@@ -65,6 +81,8 @@ private:
   struct RangeFunctor;
 
   void Init(const vtkm::cont::CoordinateSystem& coordinates, const vtkm::cont::Field& scalarField);
+
+  void Init(const vtkm::cont::CoordinateSystemFP16& coordinates, const vtkm::cont::Field& scalarField);
 };
 }
 } //namespace vtkm::rendering

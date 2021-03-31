@@ -110,6 +110,30 @@ vtkm::cont::ArrayHandle<vtkm::Range> ArrayRangeCompute(
   return rangeArray;
 }
 
+VTKM_CONT
+vtkm::cont::ArrayHandle<vtkm::Range> ArrayRangeCompute(
+  const vtkm::cont::ArrayHandle<vtkm::Vec3f_16,
+                                vtkm::cont::ArrayHandleUniformPointCoordinatesFP16::StorageTag>& array,
+  vtkm::cont::DeviceAdapterId)
+{
+  vtkm::internal::ArrayPortalUniformPointCoordinatesFP16 portal = array.ReadPortal();
+
+  // In this portal we know that the min value is the first entry and the
+  // max value is the last entry.
+  vtkm::Vec3f_16 minimum = portal.Get(0);
+  vtkm::Vec3f_16 maximum = portal.Get(portal.GetNumberOfValues() - 1);
+
+  vtkm::cont::ArrayHandle<vtkm::Range> rangeArray;
+  rangeArray.Allocate(3);
+  vtkm::cont::ArrayHandle<vtkm::Range>::WritePortalType outPortal = rangeArray.WritePortal();
+  outPortal.Set(0, vtkm::Range(minimum[0].to_float(), maximum[0].to_float()));
+  outPortal.Set(1, vtkm::Range(minimum[1].to_float(), maximum[1].to_float()));
+  outPortal.Set(2, vtkm::Range(minimum[2].to_float(), maximum[2].to_float()));
+
+  return rangeArray;
+}
+
+
 VTKM_CONT vtkm::cont::ArrayHandle<vtkm::Range> ArrayRangeCompute(
   const vtkm::cont::ArrayHandle<vtkm::Id, vtkm::cont::StorageTagIndex>& input,
   vtkm::cont::DeviceAdapterId)

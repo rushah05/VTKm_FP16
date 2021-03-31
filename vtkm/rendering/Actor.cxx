@@ -22,6 +22,7 @@ struct Actor::InternalsType
 {
   vtkm::cont::DynamicCellSet Cells;
   vtkm::cont::CoordinateSystem Coordinates;
+  vtkm::cont::CoordinateSystemFP16 CoordinatesFP16;
   vtkm::cont::Field ScalarField;
   vtkm::cont::ColorTable ColorTable;
 
@@ -51,6 +52,31 @@ struct Actor::InternalsType
     , ColorTable(colorTable)
   {
   }
+
+  VTKM_CONT
+  InternalsType(const vtkm::cont::DynamicCellSet& cells,
+                const vtkm::cont::CoordinateSystemFP16& coordinates,
+                const vtkm::cont::Field& scalarField,
+                const vtkm::rendering::Color& color)
+    : Cells(cells)
+    , CoordinatesFP16(coordinates)
+    , ScalarField(scalarField)
+    , ColorTable(vtkm::Range{ 0, 1 }, color.Components, color.Components)
+  {
+  }
+
+  VTKM_CONT
+  InternalsType(const vtkm::cont::DynamicCellSet& cells,
+                const vtkm::cont::CoordinateSystemFP16& coordinates,
+                const vtkm::cont::Field& scalarField,
+                const vtkm::cont::ColorTable& colorTable = vtkm::cont::ColorTable::Preset::Default)
+    : Cells(cells)
+    , CoordinatesFP16(coordinates)
+    , ScalarField(scalarField)
+    , ColorTable(colorTable)
+  {
+  }
+
 };
 
 Actor::Actor(const vtkm::cont::DynamicCellSet& cells,
@@ -88,6 +114,45 @@ void Actor::Init(const vtkm::cont::CoordinateSystem& coordinates,
   this->Internals->SpatialBounds = coordinates.GetBounds();
 }
 
+
+
+
+Actor::Actor(const vtkm::cont::DynamicCellSet& cells,
+             const vtkm::cont::CoordinateSystemFP16& coordinates,
+             const vtkm::cont::Field& scalarField)
+  : Internals(new InternalsType(cells, coordinates, scalarField))
+{
+  this->Init(coordinates, scalarField);
+}
+
+Actor::Actor(const vtkm::cont::DynamicCellSet& cells,
+             const vtkm::cont::CoordinateSystemFP16& coordinates,
+             const vtkm::cont::Field& scalarField,
+             const vtkm::rendering::Color& color)
+  : Internals(new InternalsType(cells, coordinates, scalarField, color))
+{
+  this->Init(coordinates, scalarField);
+}
+
+Actor::Actor(const vtkm::cont::DynamicCellSet& cells,
+             const vtkm::cont::CoordinateSystemFP16& coordinates,
+             const vtkm::cont::Field& scalarField,
+             const vtkm::cont::ColorTable& colorTable)
+  : Internals(new InternalsType(cells, coordinates, scalarField, colorTable))
+{
+  this->Init(coordinates, scalarField);
+}
+
+void Actor::Init(const vtkm::cont::CoordinateSystemFP16& coordinates,
+                 const vtkm::cont::Field& scalarField)
+{
+  VTKM_ASSERT(scalarField.GetData().GetNumberOfComponentsFlat() == 1);
+
+  scalarField.GetRange(&this->Internals->ScalarRange);
+  this->Internals->SpatialBounds = coordinates.GetBounds();
+}
+
+
 void Actor::Render(vtkm::rendering::Mapper& mapper,
                    vtkm::rendering::Canvas& canvas,
                    const vtkm::rendering::Camera& camera) const
@@ -110,6 +175,11 @@ const vtkm::cont::DynamicCellSet& Actor::GetCells() const
 const vtkm::cont::CoordinateSystem& Actor::GetCoordinates() const
 {
   return this->Internals->Coordinates;
+}
+
+const vtkm::cont::CoordinateSystemFP16& Actor::GetCoordinatesFP16() const
+{
+  return this->Internals->CoordinatesFP16;
 }
 
 const vtkm::cont::Field& Actor::GetScalarField() const

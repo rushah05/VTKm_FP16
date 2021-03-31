@@ -74,6 +74,16 @@ public:
 #endif
   }
 
+  VTKM_EXEC_CONT
+  operator float() const
+  {
+#ifdef __CUDA_ARCH__
+    return __half2float(data);
+#else
+    return cudaH2F(data);
+#endif
+  }
+
 
  VTKM_EXEC_CONT
   TypesHalf operator + (TypesHalf& h){
@@ -153,6 +163,16 @@ public:
 #endif
  }
 
+ VTKM_EXEC_CONT
+ TypesHalf operator * (double d) const{
+   float f = (float) d;	 
+#ifdef  __CUDA_ARCH__
+   return TypesHalf(__hmul(data, __float2half(f)));
+#else
+   return TypesHalf(hostH2F( hostF2H(cudaH2F(data)) * hostF2H(f)));
+#endif
+ }
+
 VTKM_EXEC_CONT
  TypesHalf operator / (TypesHalf& h){
 #ifdef  __CUDA_ARCH__
@@ -165,9 +185,19 @@ VTKM_EXEC_CONT
  VTKM_EXEC_CONT
   TypesHalf operator / (const TypesHalf& h) const{
 #ifdef  __CUDA_ARCH__
-   return TypesHalf(__hdiv(h.get(), data));
+   return TypesHalf(__hdiv(data, h.get()));
 #else
    return TypesHalf(hostH2F( hostF2H(cudaH2F(data)) / hostF2H(cudaH2F(h.get())) ));
+#endif
+ }
+
+ VTKM_EXEC_CONT
+  TypesHalf operator / (float& f) {
+#ifdef  __CUDA_ARCH__
+   return TypesHalf(__hdiv(data, cudaF2H(f)));
+#else
+
+   return TypesHalf(hostH2F( hostF2H(cudaH2F(data)) / hostF2H(f)));
 #endif
  }
 
@@ -274,6 +304,20 @@ VTKM_EXEC_CONT
  {
      os << ph.to_float();
      return os;
+ }
+
+ VTKM_CONT
+ static inline std::ifstream& operator>>(std::ifstream& ifs, const TypesHalf& ph)
+ {
+     ifs >> ph.to_float();
+     return ifs;
+ }
+
+ VTKM_CONT
+ static inline std::ifstream& operator>>(std::ifstream& ifs, const float& f)
+ {
+     ifs >> TypesHalf(f);
+     return ifs;
  }
 
  VTKM_CONT

@@ -26,7 +26,7 @@ namespace worklet
 {
 namespace flying_edges
 {
-/*
+
 namespace detail
 {
 template <typename T, typename S>
@@ -46,7 +46,7 @@ vtkm::Id extend_by(vtkm::cont::ArrayHandle<T, S>& handle, vtkm::Id size)
   }
   return oldLen;
 }
-}*/
+}
 
 //----------------------------------------------------------------------------
 template <typename ValueType,
@@ -93,7 +93,7 @@ vtkm::cont::CellSetSingleType<> execute(
   sharedState.CellIdMap.Shrink(0);
 
   vtkm::cont::ArrayHandle<vtkm::Id> triangle_topology;
- /* for (std::size_t i = 0; i < isovalues.size(); ++i)
+  for (std::size_t i = 0; i < isovalues.size(); ++i)
   {
     auto multiContourCellOffset = sharedState.CellIdMap.GetNumberOfValues();
     auto multiContourPointOffset = sharedState.InterpolationWeights.GetNumberOfValues();
@@ -193,9 +193,9 @@ vtkm::cont::CellSetSingleType<> execute(
       }
     }
   }
-*/
+
   vtkm::cont::CellSetSingleType<> outputCells;
-  //outputCells.Fill(points.GetNumberOfValues(), vtkm::CELL_SHAPE_TRIANGLE, 3, triangle_topology);
+  outputCells.Fill(points.GetNumberOfValues(), vtkm::CELL_SHAPE_TRIANGLE, 3, triangle_topology);
   return outputCells;
 }
 

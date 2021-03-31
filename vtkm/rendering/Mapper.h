@@ -13,6 +13,7 @@
 #include <vtkm/Deprecated.h>
 #include <vtkm/cont/ColorTable.h>
 #include <vtkm/cont/CoordinateSystem.h>
+#include <vtkm/cont/CoordinateSystemFP16.h>
 #include <vtkm/cont/DynamicCellSet.h>
 #include <vtkm/cont/Field.h>
 #include <vtkm/rendering/Camera.h>
@@ -36,6 +37,14 @@ public:
                            const vtkm::cont::ColorTable& colorTable,
                            const vtkm::rendering::Camera& camera,
                            const vtkm::Range& scalarRange) = 0;
+
+ /* virtual void RenderCells(const vtkm::cont::DynamicCellSet& cellset,
+                           const vtkm::cont::CoordinateSystemFP16& coords,
+                           const vtkm::cont::Field& scalarField,
+                           const vtkm::cont::ColorTable& colorTable,
+                           const vtkm::rendering::Camera& camera,
+                           const vtkm::Range& scalarRange) = 0;
+*/
 
   virtual void SetActiveColorTable(const vtkm::cont::ColorTable& ct);
 
