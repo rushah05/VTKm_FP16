@@ -324,8 +324,8 @@ protected:
 
 private:
   // Only for internal use
-//  VTKM_EXEC_CONT
-//  public vtkm::IdComponent NumComponents() const { return this->Derived().GetNumberOfComponents(); }
+  VTKM_EXEC_CONT
+  inline vtkm::IdComponent NumComponents() const { return this->Derived().GetNumberOfComponents(); }
 
   // Only for internal use
   VTKM_EXEC_CONT
@@ -336,10 +336,6 @@ private:
   inline T& Component(vtkm::IdComponent index) { return this->Derived()[index]; }
 
 public:
-  VTKM_EXEC_CONT
-  vtkm::IdComponent NumComponents() const { return this->Derived().GetNumberOfComponents(); }
-
-
   template <vtkm::IdComponent OtherSize>
   VTKM_EXEC_CONT void CopyInto(vtkm::Vec<ComponentType, OtherSize>& dest) const
   {
@@ -1398,13 +1394,13 @@ struct DotType
 {
   //results when < 32bit can be float if somehow we are using float16/float8, otherwise is
   // int32 or uint32 depending on if it signed or not.
-  using float_type = vtkm::Float16;
+  using float_type = vtkm::Float32;
   using integer_type =
     typename std::conditional<std::is_signed<T>::value, vtkm::Int32, vtkm::UInt32>::type;
   using promote_type =
     typename std::conditional<std::is_integral<T>::value, integer_type, float_type>::type;
   using type =
-    typename std::conditional<(sizeof(T) < sizeof(vtkm::Float16)), promote_type, T>::type;
+    typename std::conditional<(sizeof(T) < sizeof(vtkm::Float32)), promote_type, T>::type;
 };
 
 template <typename T>
@@ -1450,22 +1446,12 @@ static inline VTKM_EXEC_CONT typename detail::DotType<T>::type Dot(const vtkm::V
 {
   return (a[0] * b[0]) + (a[1] * b[1]) + (a[2] * b[2]);
 }
-
-/*static inline VTKM_EXEC_CONT typename detail::DotType<vtkm::Vec<vtkm::Float16, 3>>::type Dot(
-		const vtkm::Vec<vtkm::Float16, 3>& a, const vtkm::Vec<vtkm::Float16, 3>& b)
-{
-  return (a[0].to_float() * b[0].to_float()) + (a[1].to_float() * b[1].to_float()) + (a[2].to_float() * b[2].to_float());
-}
-*/
-
 template <typename T>
 static inline VTKM_EXEC_CONT typename detail::DotType<T>::type Dot(const vtkm::Vec<T, 4>& a,
                                                                    const vtkm::Vec<T, 4>& b)
 {
   return (a[0] * b[0]) + (a[1] * b[1]) + (a[2] * b[2]) + (a[3] * b[3]);
 }
-
-
 // Integer types of a width less than an integer get implicitly casted to
 // an integer when doing a multiplication.
 #define VTK_M_SCALAR_DOT(stype)                                                   \
@@ -1482,7 +1468,6 @@ VTK_M_SCALAR_DOT(vtkm::Int32)
 VTK_M_SCALAR_DOT(vtkm::UInt32)
 VTK_M_SCALAR_DOT(vtkm::Int64)
 VTK_M_SCALAR_DOT(vtkm::UInt64)
-VTK_M_SCALAR_DOT(vtkm::Float16)
 VTK_M_SCALAR_DOT(vtkm::Float32)
 VTK_M_SCALAR_DOT(vtkm::Float64)
 

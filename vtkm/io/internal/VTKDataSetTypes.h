@@ -36,6 +36,7 @@ enum DataType
   DTYPE_INT,
   DTYPE_UNSIGNED_LONG,
   DTYPE_LONG,
+  DTYPE_FLOAT16,
   DTYPE_FLOAT,
   DTYPE_DOUBLE
 };
@@ -44,7 +45,7 @@ inline const char* DataTypeString(int id)
 {
   static const char* strings[] = {
     "",    "bit",           "unsigned_char", "char",  "unsigned_short", "short", "unsigned_int",
-    "int", "unsigned_long", "long",          "float", "double"
+    "int", "unsigned_long", "long",  "float", "double"
   };
   return strings[id];
 }
@@ -84,6 +85,13 @@ public:
     : Data(static_cast<vtkm::UInt8>(std::min(std::max(val, 1.0f), 0.0f) * 255))
   {
   }
+  /*ColorChannel8(vtkm::Float16 val)
+    : Data(static_cast<vtkm::UInt8>(std::min(std::max(val, 1.0f), 0.0f) * 255))
+  {
+  }
+*/
+
+  operator vtkm::Float16() const { return ph::TypesHalf(static_cast<vtkm::Float32>(this->Data) / 255.0f); }
   operator vtkm::Float32() const { return static_cast<vtkm::Float32>(this->Data) / 255.0f; }
   operator vtkm::UInt8() const { return this->Data; }
 
@@ -164,6 +172,12 @@ struct DataTypeName<vtkm::Float64>
 {
   static const char* Name() { return "double"; }
 };
+template <>
+struct DataTypeName<vtkm::Float16>
+{
+  static const char* Name() { return "half"; }
+};
+
 
 template <typename T, typename Functor>
 inline void SelectVecTypeAndCall(T, vtkm::IdComponent numComponents, const Functor& functor)
@@ -225,6 +239,9 @@ inline void SelectTypeAndCall(DataType dtype,
     case DTYPE_LONG:
       SelectVecTypeAndCall(vtkm::Int64(), numComponents, functor);
       break;
+     case DTYPE_FLOAT16:
+      SelectVecTypeAndCall(vtkm::Float16(), numComponents, functor);
+      break;  
     case DTYPE_FLOAT:
       SelectVecTypeAndCall(vtkm::Float32(), numComponents, functor);
       break;

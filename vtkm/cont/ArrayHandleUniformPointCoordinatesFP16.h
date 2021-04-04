@@ -124,22 +124,22 @@ private:
 public:
   static VTKM_CONT void save(BinaryBuffer& bb, const BaseType& obj)
   {
-   auto portal = obj.ReadPortal();
-   // vtkmdiy::save(bb, portal.GetDimensions());
-   // vtkmdiy::save(bb, portal.GetOrigin());
-   // vtkmdiy::save(bb, portal.GetSpacing());
+   //auto portal = obj.ReadPortal();
+   //vtkmdiy::save(bb, portal.GetDimensions());
+   //vtkmdiy::save(bb, portal.GetOrigin());
+   //vtkmdiy::save(bb, portal.GetSpacing());
   
   }
 
   static VTKM_CONT void load(BinaryBuffer& bb, BaseType& obj)
   {
-    vtkm::Id3 dims;
-    typename BaseType::ValueType origin, spacing;
+    //vtkm::Id3 dims;
+    //typename BaseType::ValueType origin, spacing;
 
     //vtkmdiy::load(bb, dims);
     //vtkmdiy::load(bb, origin);
     //vtkmdiy::load(bb, spacing);
-    obj = vtkm::cont::ArrayHandleUniformPointCoordinatesFP16(dims, origin, spacing);
+    //obj = vtkm::cont::ArrayHandleUniformPointCoordinatesFP16(dims, origin, spacing);
 
   }
 };

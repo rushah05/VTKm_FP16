@@ -46,6 +46,8 @@ using TypeListIndex = vtkm::List<vtkm::Id, vtkm::Id2, vtkm::Id3>;
 /// vtkm::Float64).
 using TypeListFieldScalar = vtkm::List<vtkm::Float32, vtkm::Float64>;
 
+using TypeListFieldScalarFP16 = vtkm::List<vtkm::Float16>;
+
 /// A list containing types for values for fields with two dimensional
 /// vectors.
 ///
@@ -135,7 +137,6 @@ using TypeListVecCommon = vtkm::List<vtkm::Vec2ui_8,
                                      vtkm::Vec3ui_8,
                                      vtkm::Vec3i_32,
                                      vtkm::Vec3i_64,
-				     vtkm::Vec3f_16,
                                      vtkm::Vec3f_32,
                                      vtkm::Vec3f_64,
                                      vtkm::Vec4ui_8,

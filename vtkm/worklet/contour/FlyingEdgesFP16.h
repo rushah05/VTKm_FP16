@@ -57,7 +57,7 @@ template <typename ValueType,
           typename NormalType>
 vtkm::cont::CellSetSingleType<> execute(
   const vtkm::cont::CellSetStructured<3>& cells,
-  const vtkm::cont::ArrayHandleUniformPointCoordinatesFP16& coordinateSystem,
+  const vtkm::cont::ArrayHandle<ValueType,vtkm::cont::StorageTagUniformPointsFP16>& coordinateSystem,
   const std::vector<ValueType>& isovalues,
   const vtkm::cont::ArrayHandle<ValueType, StorageTagField>& inputField,
   vtkm::cont::ArrayHandle<vtkm::Vec<CoordinateType, 3>, StorageTagVertices>& points,
